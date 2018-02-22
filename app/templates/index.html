@@ -1,3 +1,68 @@
-<div>
-	Hello World
-<div>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <!-- Responsive Web Page -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- <meta http-equiv="Content-Security-Policy" content="child-src blob: ; img-src data: blob: ; script-src 'self' 'unsafe-eval'; connect-src https://*.tiles.mapbox.com https://api.mapbox.com"> -->
+
+  <title>ReadyForIt</title>
+  <meta name="description" content="ReadyForIt Web App">
+  <meta name="author" content="ReadyForIt">
+  
+  <!-- Map Box -->
+  <script src='https://api.mapbox.com/mapbox-gl-js/v0.44.1/mapbox-gl.js'></script>
+  <link href='https://api.mapbox.com/mapbox-gl-js/v0.44.1/mapbox-gl.css' rel='stylesheet'/>
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+  <!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
+  <![endif]-->
+</head>
+
+<body>
+  <div id="topNav">
+    <span class="toggle" onclick="openNav()"><i class="fa fa-bars"></i></span>
+  </div>
+
+  <!-- Side Nav -->
+  <div id="mySidenav" class="sidenav">
+    <div id="logo">
+      <h2>ReadyForIt</h2>
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"><i class="fa fa-angle-double-left"></i></a>
+    </div>
+    
+    <hr>
+    
+    <ul>
+      <li><i class="fa fa-cloud"></i><a href="#">Weather Updates</a></li>
+      <li><i class="fa fa-ambulance"></i><a href="#">Donations</a></li>
+      <li><i class="fa fa-comments"></i><a href="#">People Say</a></li>
+      <li><i class="fa fa-history"></i><a href="#">Statistics</a></li> 
+    </ul>
+
+    <!-- Social media links -->
+    <div id="socialMedia">
+      <a href="#" class="fa fa-facebook"></a>
+      <a href="#" class="fa fa-twitter"></a>
+      <a href="#" class="fa fa-instagram"></a>
+    </div>
+  </div>
+  <!-- End of Side Nav -->
+  <!-- Map Box -->
+  <div id="map"></div>
+  <div id="mapDark"></div>
+  <!-- End of Map Box -->
+
+  <!-- jQuery -->
+  <script src="{{ url_for('static', filename='js/jquery-3.3.1.min.js') }}"></script>
+  <!-- JavaScript -->
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/map-box.js') }}"></script>
+</body>
+</html>
