@@ -5,6 +5,7 @@ import os
 
 
 app = Flask(__name__)
+app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0 #disable file "cache"
 app.config.from_object(os.environ.get('CONFIG') or 'config.DevelopmentConfig')
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
