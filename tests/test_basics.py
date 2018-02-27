@@ -16,7 +16,6 @@ class BasicsTestCase(TestCase):
         db.session.remove()
         db.drop_all()
 
-
     def test_app_exists(self):
         self.assertFalse(current_app is None)
 
