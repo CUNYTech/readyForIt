@@ -9,14 +9,14 @@
   <title>ReadyForIt</title>
   <meta name="description" content="ReadyForIt Web App">
   <meta name="author" content="ReadyForIt">
-  
+
   <!-- Map Box -->
   <script src='https://api.mapbox.com/mapbox-gl-js/v0.44.1/mapbox-gl.js'></script>
-  <link href='https://api.mapbox.com/mapbox-gl-js/v0.44.1/mapbox-gl.css' rel='stylesheet'/>
+  <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/v0.44.1/mapbox-gl.css'/>
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans">
   <!-- Custom CSS -->
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 
@@ -36,28 +36,62 @@
       <h2>ReadyForIt</h2>
       <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"><i class="fa fa-angle-double-left"></i></a>
     </div>
-    
+
     <hr>
-    
+
     <ul>
       <li><i class="fa fa-cloud"></i><a href="#">Weather Updates</a></li>
       <li><i class="fa fa-ambulance"></i><a href="#">Donations</a></li>
       <li><i class="fa fa-comments"></i><a href="#">People Say</a></li>
-      <li><i class="fa fa-history"></i><a href="#">Statistics</a></li> 
+      <li><i class="fa fa-history"></i><a href="#">Statistics</a></li>
     </ul>
+
+    <hr>
+    <!-- Sign Up -->
+    <div id="sign-up">
+      <a href="#" onclick="showSignUp()">Sign up</a>
+    </div>
 
     <!-- Social media links -->
     <div id="socialMedia">
       <a href="#" class="fa fa-facebook"></a>
       <a href="#" class="fa fa-twitter"></a>
       <a href="#" class="fa fa-instagram"></a>
+      <p>Copyright @ 2018 ReadyForIt. All rights reserved.</p>
     </div>
+    <!-- Copyright -->
+
   </div>
   <!-- End of Side Nav -->
   <!-- Map Box -->
   <div id="map"></div>
   <div id="mapDark"></div>
   <!-- End of Map Box -->
+
+  <!-- Sign up Form -->
+  <div id="sign-up-form">
+    <form action="#" id="form-sign">
+      <div class="container">
+        <h2>Sign Up</h2>
+        <p>Please fill out this form to receive emergency alerts.</p>
+        <hr>
+        <label for="name"><b>Name: </b></label><br>
+        <input type="name" placeholder="Name" name="name" required>
+        <br>
+        <label for="email"><b>Email: </b></label><br>
+        <input type="text" placeholder="Email" name="email" required>
+        <br>
+        <label for="phone"><b>Phone Number: </b></label><br>
+        <input type='tel' placeholder="Phone" name="phone" required>
+        <br>
+        <div class="clearfix">
+          <button type="button" class="cancelbtn" onclick="closeSignUp()">Cancel</button>
+          <button type="submit" class="signupbtn" onclick="closeSignUp()">Sign Up</button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <!-- End of Sign up Form -->
 
   <!-- jQuery -->
   <script src="{{ url_for('static', filename='js/jquery-3.3.1.min.js') }}"></script>
