@@ -118,3 +118,64 @@ body {
   z-index: 1;
   
 }
+/*Map Layers*/
+#layersNav {
+	float: right;
+	height: 100%;
+	width: 20%;
+	top: 0;
+	right: 0;
+	z-index: 10;
+	background-color: white;
+	position: fixed;
+	padding-top: 50px;
+  	box-shadow: 0 -1px 24px rgba(0,0,0,0.4);
+  	transition: 0.5s;
+}
+
+#openLayers {
+	position: absolute;
+	overflow: hidden;
+	top: 2%;
+	right: 2%;
+	z-index: 10;
+	font-size: 1.8em;
+	border-radius: 7px;
+	box-shadow: 0 -1px 10px rgba(0,0,0,0.4);
+}
+
+.closeLayers {
+	position: absolute;
+	top: 10px;
+	left: 10px;
+	font-size: 1.5em;
+}
+
+button {	
+	color: #fff;
+	font-weight: bolder;
+  	//background-color: #007bff;
+  	//border-color: #007bff;
+  	//border-radius: 5px;
+    color: #313131;
+}
+
+button:hover {	
+    font-weight: bolder;
+  	background-color: #0069d9;
+  	border-color: #0062cc;
+    color: white;
+}
+
+.layer-btn {
+	display: block;
+	width: 100%;
+	padding: .5em;
+	margin: 0;
+	letter-spacing: 3px;
+
+}
+
+.hide{
+	display:none;
+}

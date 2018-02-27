@@ -13,4 +13,27 @@ function closeNav() {
   // document.getElementById("map").classList.remove("opClass");
 }
 
+//Layers
+var layerSelection = document.getElementById("layersNav");
+var closeLayers = document.querySelector(".closeLayers");
+var openBtn = document.getElementById("openLayers");
 
+function toggleLayers() {	
+	layerSelection.classList.toggle("hide");
+}
+
+openBtn.addEventListener("click", function(){
+	toggleLayers();
+});
+closeLayers.addEventListener("click", function(){
+	toggleLayers();
+});
+
+$(document).ready(function() {	
+	$( '.layer-btn' ).click(function() {
+	  $( this ).toggleClass( 'fa fa-check-square' );      
+	});
+  $('#radar').click(function(){
+    radar();
+  });
+});
