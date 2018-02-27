@@ -1,6 +1,10 @@
-from app import app
+from app import create_app, db
+from flask_migrate import Migrate
+import os
 import unittest
 
+app = create_app(os.environ.get('CONFIG') or 'config.DevelopmentConfig')
+migrate = Migrate(app, db)
 
 
 @app.cli.command()
@@ -15,5 +19,4 @@ def test():
 
 @app.cli.command()
 def hello():
-	print('hello')
-
+    print('hello')
