@@ -19,6 +19,9 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans">
   <!-- Custom CSS -->
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/map.css') }}">
+  <!-- Mapbox CSS -->
+  <!-- <link href='https://www.mapbox.com/base/latest/base.css' rel='stylesheet' /> -->
 
   <!--[if lt IE 9]>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
@@ -64,7 +67,8 @@
   </div>
   <!-- End of Side Nav -->
   <!-- Map Box -->
-  <div id="map"></div>
+  <nav id="layersMenu"></nav>
+  <div id="map"><div class="overlay info"></div>
   <div id="mapDark"></div>
   <!-- End of Map Box -->
 
@@ -98,7 +102,9 @@
   <script src="{{ url_for('static', filename='js/jquery-3.3.1.min.js') }}"></script>
 
   <!-- JavaScript -->
-  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/dummy_data.js') }}"></script>
   <script src="{{ url_for('static', filename='js/map-box.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+  
 </body>
 </html>

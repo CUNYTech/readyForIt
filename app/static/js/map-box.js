@@ -6,44 +6,153 @@ var map = new mapboxgl.Map({
     zoom: 5
 });
 
+
+//changing views on extent change
+const zoomThreshold = 9.5;
+const infobox = document.querySelector('.info');
+const layers = {
+    "overview": ["nws-watchwarn-tiles", "radar-tiles"],
+    "local": ["points", "areas"]
+}
+map.on('moveend', function () {
+
+    console.log(map.getZoom());
+
+    //change layers view
+    if (map.getZoom() > zoomThreshold) {
+        infobox.classList.add('hidden');
+    } else {
+        infobox.classList.remove('hidden');
+        
+    }
+
+    //change details view
+    if (map.getZoom() >= zoomThreshold - 1.5) {
+        getWatchWarnInBound(map.getBounds()).then(features => {
+            console.log(features);
+            if (features.length) {
+                infobox.innerHTML = '<h3>current Watch/Warnings in view</h3>' + features.map(feature => {
+                    const attr = feature.attributes;
+                    return `<p>${attr.phenom}-${attr.prod_type}\n<a href="${attr.url}" target="_blank">${attr.warnid.trim()}</a></p>`
+                }).join('');
+            } else {
+                infobox.innerHTML = '<p>no Watch/Warnings in view</p>';
+            }
+        });
+    } else {
+        infobox.innerHTML = '<p>zoom in for more details</p>';
+    }
+})
+
+const layersMenu = document.getElementById('layersMenu');
+function generateMenuLink(id) {
+    var link = document.createElement('a');
+    link.href = '#';
+    link.className = 'active';
+    link.textContent = id;
+
+    link.onclick = function (e) {
+        var clickedLayer = this.textContent;
+        e.preventDefault();
+        e.stopPropagation();
+
+        var visibility = map.getLayoutProperty(clickedLayer, 'visibility');
+
+        if (visibility === 'visible') {
+            map.setLayoutProperty(clickedLayer, 'visibility', 'none');
+            this.className = '';
+        } else {
+            this.className = 'active';
+            map.setLayoutProperty(clickedLayer, 'visibility', 'visible');
+        }
+    };
+
+    layersMenu.appendChild(link);
+}
+
+//init layersMenu
+layers.local.map(id => generateMenuLink(id));
+layers.overview.map(id => generateMenuLink(id));
+
+//Promise returns latlng array of first result
+function getWatchWarnInBound(bound) {
+    return new Promise((resolve, reject) => {
+        return fetch(`https://idpgis.ncep.noaa.gov/arcgis/rest/services/NWS_Forecasts_Guidance_Warnings/watch_warn_adv/MapServer/1/query?f=json&returnGeometry=true&spatialRel=esriSpatialRelIntersects&maxAllowableOffset=0&geometry={"xmin":${bound._ne.lng},"ymin":${bound._ne.lat},"xmax":${bound._sw.lng},"ymax":${bound._sw.lat},"spatialReference":{"wkid":4326}&geometryType=esriGeometryEnvelope&inSR=4326&outFields=*&outSR=4326`)
+            .then(res => res.json())
+            .then(data => {
+                resolve(data.features);
+            })
+    });
+}
+
+
 map.on('load', function () {
 
+    //add radar layer from aerisweather
     map.addLayer({
-        'id': 'maine',
-        'type': 'fill',
-        'source': {
-            'type': 'geojson',
-            'data': {
-                'type': 'Feature',
-                'geometry': {
-                    'type': 'Polygon',
-                    'coordinates': [[[-67.13734351262877, 45.137451890638886],
-                        [-66.96466, 44.8097],
-                        [-68.03252, 44.3252],
-                        [-69.06, 43.98],
-                        [-70.11617, 43.68405],
-                        [-70.64573401557249, 43.090083319667144],
-                        [-70.75102474636725, 43.08003225358635],
-                        [-70.79761105007827, 43.21973948828747],
-                        [-70.98176001655037, 43.36789581966826],
-                        [-70.94416541205806, 43.46633942318431],
-                        [-71.08482, 45.3052400000002],
-                        [-70.6600225491012, 45.46022288673396],
-                        [-70.30495378282376, 45.914794623389355],
-                        [-70.00014034695016, 46.69317088478567],
-                        [-69.23708614772835, 47.44777598732787],
-                        [-68.90478084987546, 47.184794623394396],
-                        [-68.23430497910454, 47.35462921812177],
-                        [-67.79035274928509, 47.066248887716995],
-                        [-67.79141211614706, 45.702585354182816],
-                        [-67.13734351262877, 45.137451890638886]]]
-                }
-            }
-        },
-        'layout': {},
-        'paint': {
-            'fill-color': '#088',
-            'fill-opacity': 0.8
+        "id": "radar-tiles",
+        "type": "raster",
+        "source": "aerisweather-radar",
+        "minzoom": 0,
+        "maxzoom": zoomThreshold,
+        "source": {
+            "type": 'raster',
+            "tiles": [
+                'https://maps1.aerisapi.com/H2dWFu3nW0pw7PMQjR9vD_SEtTj2ZUnANcEedAQ1m9k7jaFD8T11ZMaCPjptBL/radar/{z}/{x}/{y}/current.png',
+                'https://maps2.aerisapi.com/H2dWFu3nW0pw7PMQjR9vD_SEtTj2ZUnANcEedAQ1m9k7jaFD8T11ZMaCPjptBL/radar/{z}/{x}/{y}/current.png',
+                'https://maps3.aerisapi.com/H2dWFu3nW0pw7PMQjR9vD_SEtTj2ZUnANcEedAQ1m9k7jaFD8T11ZMaCPjptBL/radar/{z}/{x}/{y}/current.png',
+                'https://maps4.aerisapi.com/H2dWFu3nW0pw7PMQjR9vD_SEtTj2ZUnANcEedAQ1m9k7jaFD8T11ZMaCPjptBL/radar/{z}/{x}/{y}/current.png'
+            ],
+            "tileSize": 256,
+            "attribution": "<a href='https://www.aerisweather.com/'>AerisWeather</a>"
         }
     });
+
+    //added watch/warn layer from NWS
+    map.addLayer({
+        "id": "nws-watchwarn-tiles",
+        "type": "raster",
+        "minzoom": 0,
+        "maxzoom": zoomThreshold,
+        "source": {
+            "type": "raster",
+            "tiles": ['https://idpgis.ncep.noaa.gov/arcgis/rest/services/NWS_Forecasts_Guidance_Warnings/watch_warn_adv/MapServer/export?dpi=35&transparent=true&format=png32&layers=show:0,1&bbox={bbox-epsg-3857}&bboxSR=3857&imageSR=3857&size=1024,1024&f=image'],
+            "tileSize": 1024,
+            "attribution": "Sources: Esri, USGS, NOAA"
+        },
+        "paint": {
+            "raster-opacity": 0.3
+        }
+    });
+
+    //add dummy user data
+    map.addLayer({
+        "id": "points",
+        "type": "symbol",
+        "minzoom": zoomThreshold,
+        "maxzoom": 22,
+        "source": {
+            "type": "geojson",
+            "data": DUMMY_POINTS,
+        },
+        "layout": {
+            "icon-image": "{icon}-15"
+        }
+    })
+
+    map.addLayer({
+        "id": "areas",
+        "type": "fill",
+        "minzoom": zoomThreshold,
+        "maxzoom": 22,
+        "source": {
+            "type": "geojson",
+            "data": DUMMY_AREA,
+        },
+        "paint": {
+            "fill-color": "#880000",
+            "fill-opacity": 0.4
+        },
+    })
+
 });
