@@ -1,0 +1,64 @@
+.overlay{
+    z-index: 10;
+    position: absolute;
+    background-color: rgba(228, 228, 228,0.8);
+    display: inline-block;
+}
+
+.info{
+    left: 0;
+    bottom: 0;
+    margin-right: 5px;
+    margin-bottom: 28px;
+    padding: 5px;
+    width: 250px;
+    height: 200px;
+    overflow: auto;
+}
+
+.hidden{
+    display: none;
+}
+
+/* temp menu style from https://www.mapbox.com/mapbox-gl-js/example/toggle-layers/ */
+#layersMenu {
+    background: #fff;
+    position: absolute;
+    z-index: 10;
+    top: 10px;
+    right: 10px;
+    border-radius: 3px;
+    width: 120px;
+    border: 1px solid rgba(0,0,0,0.4);
+    font-family: 'Open Sans', sans-serif;
+}
+
+#layersMenu a {
+    font-size: 13px;
+    color: #404040;
+    display: block;
+    margin: 0;
+    padding: 0;
+    padding: 10px;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(0,0,0,0.25);
+    text-align: center;
+}
+
+#layersMenu a:last-child {
+    border: none;
+}
+
+#layersMenu a:hover {
+    background-color: #f8f8f8;
+    color: #404040;
+}
+
+#layersMenu a.active {
+    background-color: #3887be;
+    color: #ffffff;
+}
+
+#layersMenu a.active:hover {
+    background: #3074a4;
+}

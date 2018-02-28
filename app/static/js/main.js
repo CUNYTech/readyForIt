@@ -34,6 +34,6 @@ $(document).ready(function() {
 	  $( this ).toggleClass( 'fa fa-check-square' );      
 	});
   $('#radar').click(function(){
-    radar();
+    //radar();
   });
 });
