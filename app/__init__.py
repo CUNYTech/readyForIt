@@ -11,6 +11,8 @@ def create_app(config):
     db.init_app(app)
     from app.views.main import main as main_blueprint
     app.register_blueprint(main_blueprint)
+    from app.api_v_1.users import api as api_users
+    app.register_blueprint(api_users)
 
     from app import models
 

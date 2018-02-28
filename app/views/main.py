@@ -5,7 +5,7 @@ main = Blueprint('main', __name__)
 # created rout at index of website then render the index.html tempalte
 
 
-@main.route('/')
+@main.route('/', methods=['GET'])
 def index():
 	return render_template('index.html')
 

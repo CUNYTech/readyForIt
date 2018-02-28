@@ -70,23 +70,23 @@
 
   <!-- Sign up Form -->
   <div id="sign-up-form">
-    <form action="#" id="form-sign">
+    <form id="form-sign">
       <div class="container">
         <h2>Sign Up</h2>
         <p>Please fill out this form to receive emergency alerts.</p>
         <hr>
         <label for="name"><b>Name: </b></label><br>
-        <input type="name" placeholder="Name" name="name" required>
+        <input type="name" placeholder="Name" id="name" name="name" required>
         <br>
         <label for="email"><b>Email: </b></label><br>
-        <input type="text" placeholder="Email" name="email" required>
+        <input type="text" placeholder="Email" id="email" name="email" required>
         <br>
         <label for="phone"><b>Phone Number: </b></label><br>
-        <input type='tel' placeholder="Phone" name="phone" required>
+        <input type='tel' placeholder="Phone" id="phone" name="phone" required>
         <br>
         <div class="clearfix">
           <button type="button" class="cancelbtn" onclick="closeSignUp()">Cancel</button>
-          <button type="submit" class="signupbtn" onclick="closeSignUp()">Sign Up</button>
+          <button type="submit" class="signupbtn">Sign Up</button>
         </div>
       </div>
     </form>

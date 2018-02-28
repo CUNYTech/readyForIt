@@ -19,3 +19,27 @@ function showSignUp() {
 function closeSignUp() {
   document.getElementById("sign-up-form").style.display = "none";
 }
+
+$(function(){
+  $('#form-sign').submit(function(e){
+    console.log($('#name').val());
+    e.preventDefault();
+    var name = $("input[name='name']").val();
+    var email = $("input[name='email']").val();
+    var phone = $("input[name='phone']").val();
+    console.log(`${name} ${email} ${phone}`)
+    $.ajax({
+      url: 'api/register',
+      data: $('#form-sign').serialize(),
+      type: 'POST',
+      success: function(response) {
+        console.log(response)
+        alert('Now You shall also be READYFORIT!')
+        closeSignUp();
+      },
+      error: function(error) {
+        console.log(error.status);
+      }
+    })
+  });
+});
