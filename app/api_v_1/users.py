@@ -10,7 +10,7 @@ def register():
     first_name = request.form['name']
     email = request.form['email']
     phone_number = request.form['phone']
-    if first_name == 'marcus':
+    if '@' in email and '.' in email:
         new_user = User(first_name=first_name, email=email, phone_number=phone_number)
         db.session.add(new_user)
         db.session.commit()
@@ -18,7 +18,8 @@ def register():
         response.status_code = 201
         return response
     else:
-        response = jsonify({'error': first_name, 'message': 'only marcus can pass'})
+        response = jsonify({'error': 'Bad Request',
+                            'message': 'Please ignore'})
         response.status_code = 400
         return response
 

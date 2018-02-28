@@ -22,12 +22,17 @@ function closeSignUp() {
 
 $(function(){
   $('#form-sign').submit(function(e){
-    console.log($('#name').val());
     e.preventDefault();
     var name = $("input[name='name']").val();
     var email = $("input[name='email']").val();
     var phone = $("input[name='phone']").val();
-    console.log(`${name} ${email} ${phone}`)
+    if (email.indexOf("@", 0) < 0 || email.indexOf(".", 0) < 0)
+    {
+        window.alert("Please enter a valid e-mail address.");
+        $("input[name='email']").focus();
+        return false;
+    }
+
     $.ajax({
       url: 'api/register',
       data: $('#form-sign').serialize(),
