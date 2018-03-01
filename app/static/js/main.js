@@ -43,7 +43,7 @@ $(function(){
         closeSignUp();
       },
       error: function(error) {
-        console.log(error.status);
+        alert('Email already in use')
       }
     })
   });

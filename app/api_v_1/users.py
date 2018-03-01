@@ -11,17 +11,18 @@ def register():
     email = request.form['email']
     phone_number = request.form['phone']
     if '@' in email and '.' in email:
-        new_user = User(first_name=first_name, email=email, phone_number=phone_number)
-        db.session.add(new_user)
-        db.session.commit()
-        response = jsonify({'success': first_name, 'message': email})
-        response.status_code = 201
-        return response
-    else:
-        response = jsonify({'error': 'Bad Request',
-                            'message': 'Please ignore'})
-        response.status_code = 400
-        return response
+        if not User.query.filter_by(email=email).first():
+            new_user = User(first_name=first_name, email=email, phone_number=phone_number)
+            db.session.add(new_user)
+            db.session.commit()
+            response = jsonify({'success': first_name, 'message': email})
+            response.status_code = 201
+            return response
+
+    response = jsonify({'error': 'Bad Request',
+                        'message': 'Please ignore'})
+    response.status_code = 400
+    return response
 
 
 @api.route('/test', methods=['GET'])

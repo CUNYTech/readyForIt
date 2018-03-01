@@ -13,4 +13,4 @@ class User(db.Model):
     zip = db.Column(db.Integer)
 
     def __repr__(self):
-        return '<User {}>'.format(self.username)
+        return '<User {}>'.format(self.first_name)
