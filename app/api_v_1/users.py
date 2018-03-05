@@ -2,25 +2,22 @@ from flask import Blueprint, abort, jsonify, request
 from app.models import User
 from app import db
 from emails import send_email
+from app.forms import UserForm
 api = Blueprint('api', __name__, url_prefix='/api')
 
 
 @api.route('/register', methods=['POST'])
 def register():
-    first_name = request.form['name']
-    email = request.form['email']
-    phone_number = request.form['phone']
-    if '@' in email and '.' in email:
-        if not User.query.filter_by(email=email).first():
-            new_user = User(first_name=first_name, email=email, phone_number=phone_number)
-            db.session.add(new_user)
-            db.session.commit()
-            response = jsonify({'success': first_name, 'message': email})
-            response.status_code = 201
-            return response
+    form = UserForm()
+    if form.validate():
+        User.create(first_name=form.first_name.data, email=form.email.data,
+                    phone_number=form.phone_number.data)
+        response = jsonify({'success': form.first_name.data, 'message': 'Success'})
+        response.status_code = 201
+        return response
 
-    response = jsonify({'error': 'Bad Request',
-                        'message': 'Please ignore'})
+    response = jsonify({'error': 'Failed',
+                        'message': form.errors})
     response.status_code = 400
     return response
 

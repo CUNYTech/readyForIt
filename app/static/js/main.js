@@ -23,9 +23,9 @@ function closeSignUp() {
 $(function(){
   $('#form-sign').submit(function(e){
     e.preventDefault();
-    var name = $("input[name='name']").val();
-    var email = $("input[name='email']").val();
-    var phone = $("input[name='phone']").val();
+    let name = $("input[name='name']").val();
+    let email = $("input[name='email']").val();
+    let phone = $("input[name='phone']").val();
     if (email.indexOf("@", 0) < 0 || email.indexOf(".", 0) < 0)
     {
         window.alert("Please enter a valid e-mail address.");
@@ -39,12 +39,19 @@ $(function(){
       type: 'POST',
       success: function(response) {
         console.log(response)
-        alert('Now You shall also be READYFORIT!')
         closeSignUp();
       },
       error: function(error) {
-        alert('Email already in use')
+        console.log(error)
       }
     })
+    let csrf_token = $('#csrf_token').val();
+    $.ajaxSetup({
+      beforeSend: function(xhr, settings) {
+          if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
+              xhr.setRequestHeader("X-CSRFToken", csrf_token);
+          }
+      }
+  });
   });
 });

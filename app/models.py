@@ -1,10 +1,10 @@
-from app import db
+from app.database import Model, db
 
 # Create user table by import SQLAlchemy database from app module
 # http://flask-sqlalchemy.pocoo.org/2.3/
 
 
-class User(db.Model):
+class User(Model):
     id = db.Column(db.Integer, primary_key=True)
     first_name = db.Column(db.String(64))
     last_name = db.Column(db.String(64))
