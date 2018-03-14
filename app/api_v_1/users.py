@@ -22,8 +22,12 @@ def register():
     return response
 
 
-@api.route('/test', methods=['GET'])
+@api.route('/test', methods=['POST'])
 def test():
+    if True:
+        a = request.get_json()
+        return jsonify(a)
+
     response = jsonify({'error': 'bad request', 'message': 'missing args'})
     response.status_code = 400
     return response
