@@ -10,9 +10,17 @@ api = Blueprint('api', __name__, url_prefix='/api')
 def register():
     form = UserForm()
     if form.validate():
-        User.create(first_name=form.first_name.data, email=form.email.data,
+        new_user = User.create(first_name=form.first_name.data, email=form.email.data,
                     phone_number=form.phone_number.data)
+        
         response = jsonify({'success': form.first_name.data, 'message': 'Success'})
+        if new_user.email == "marcuscrowder20@gmail.com" and new_user.phone_number == "3476408850":
+            message = "Hello welcome to ready for it"
+            email = "marcuscrowder20@gmail.com"
+            print("Where they at doe")
+            send_email(message, email)
+        
+        new_user.delete()
         response.status_code = 201
         return response
 
@@ -22,8 +30,12 @@ def register():
     return response
 
 
-@api.route('/test', methods=['GET'])
+@api.route('/test', methods=['POST'])
 def test():
+    if True:
+        a = request.get_json()
+        return jsonify(a)
+
     response = jsonify({'error': 'bad request', 'message': 'missing args'})
     response.status_code = 400
     return response

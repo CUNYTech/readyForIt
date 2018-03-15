@@ -1,5 +1,6 @@
 import requests
 import os
+from messages import send_sms
 from threading import Thread
 
 API_KEY = os.environ.get("MAILGUN_API_KEY")
@@ -16,6 +17,7 @@ def send_simple_message(message, email):
               "text": message})
 
     print(response.text)
+    send_sms()
 
 
 def send_email(message, email):
