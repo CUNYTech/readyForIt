@@ -10,12 +10,12 @@ class SideBar extends Component {
         return (
             <Menu className="menu">
                 <h1>ReadyForIt</h1>
-                <a id="weather" href=""><i className="fa fa-fw fa-cloud"></i><span>Weather Updates</span></a>
-                <a id="donations" href=""><i className="fa fa-fw fa-ambulance"></i><span>Donations</span></a>
-                <a id="people-say" href=""><i className="fa fa-fw fa-comments"></i><span>People Say</span></a>
-                <a id="statistics" href=""><i className="fa fa-fw fa-history"></i><span>Statistics</span></a>
+                <button className="btn" id="weather"><i className="fa fa-fw fa-cloud"></i><span>Weather Updates</span></button>
+                <button className="btn" id="donations" href=""><i className="fa fa-fw fa-ambulance"></i><span>Donations</span></button>
+                <button className="btn"id="people-say" href=""><i className="fa fa-fw fa-comments"></i><span>People Say</span></button>
+                <button className="btn"id="statistics" href=""><i className="fa fa-fw fa-history"></i><span>Statistics</span></button>
                 
-                <a id="sign-up" href="">Sign Up</a>
+                <button className="btn"id="sign-up" href="">Sign Up</button>
                 
                 <div id="social">
                     <a href="/facebook" className="fa fa-fw fa-facebook"></a>
