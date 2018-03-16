@@ -1,0 +1,45 @@
+.sign-up {
+    left: 25%;
+    z-index: 15;
+    position: absolute;
+    padding: 15px;
+    top: 15%;
+    width: 400px;
+    height: 400px;
+    background: #ffffff;
+    box-shadow: 0 0 10px rgba(0,0,0,0.6);
+    -moz-box-shadow: 0 0 10px rgba(0,0,0,0.6);
+    -webkit-box-shadow: 0 0 10px rgba(0,0,0,0.6);
+    -o-box-shadow: 0 0 10px rgba(0,0,0,0.6); 
+}
+
+#sign-up {
+    z-index: 15;
+    position: absolute;
+    z-index: 10;
+    top: 5%;
+    right: 5px;
+    font-size: 16px;
+    padding: 10px;
+    text-align: center;
+    width: auto;
+}
+
+.btn {
+    z-index: 15;
+    position: absolute;
+    top: 5%;
+    right: 5px;
+    background: #5e637a;
+    color: #ffffff;
+    /* color: #313131; */
+    width: auto;
+    padding: 0.8em;
+    text-align: left;
+    font-size: 14px;
+}
+
+.btn:hover {
+    background: #3c404f;
+    color: #ffffff;
+}

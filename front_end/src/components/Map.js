@@ -12,6 +12,7 @@ import DefaultMapStyle  from '../layers/DefaultMapStyle';
 import { WatchWarnTilesSource, WatchWarnTilesLayer} from '../layers/WatchWarnTiles';
 import { RadarTilesSource, RadarTilesLayer } from '../layers/RadarTiles';
 import SideBar from './SideBar';
+import SignUp from './SignUp';
 
 const layers = [WatchWarnTilesLayer].reduce((p,c) => {
     return p.insert(p.size, c);
@@ -95,23 +96,25 @@ class Map extends Component {
         layers[id] = !layers[id];
         this.setState({layers}, () => this.updateVisibility())
     }
+    
 
     render(){
         return(
         <React.Fragment>
-        <SideBar/>
-        <ReactMapGL
-            ref={ map => this.mapRef = map }
-            {...this.state.viewport}
-            mapStyle={this.state.mapStyle}
-            mapboxApiAccessToken={MAPBOX_TOKEN}
-            onViewportChange={this._onViewportChange}
-        />
-        <LayersMenu 
-            layers={this.state.layers}
-            onLayerMenuClick={this._onLayerMenuClick}
-        />
-        <Tray bounds={this.state.bounds}/>
+            <SideBar/>
+            <ReactMapGL
+                ref={ map => this.mapRef = map }
+                {...this.state.viewport}
+                mapStyle={this.state.mapStyle}
+                mapboxApiAccessToken={MAPBOX_TOKEN}
+                onViewportChange={this._onViewportChange}
+            />
+            <SignUp/>
+            <LayersMenu 
+                layers={this.state.layers}
+                onLayerMenuClick={this._onLayerMenuClick}
+            />
+            <Tray bounds={this.state.bounds}/>
         </React.Fragment>
         )
     }

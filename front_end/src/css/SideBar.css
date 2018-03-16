@@ -76,7 +76,7 @@
     border-bottom: 1px solid #313131;
 }
 
-.btn {
+.btn2 {
     color: #313131;
     width: 100%;
     border: none;
@@ -85,17 +85,12 @@
     font-size: 14px;
 }
 
-.btn:hover {
+.btn2:hover {
     color: #0c55f4;
 }
 
 .menu i {
     margin-right: 10px;
-}
-
-#sign-up {
-    font-size: 20px;
-    margin-left: 20px;
 }
 
 /* Social Icons Footer Side Bar */
