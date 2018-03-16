@@ -13,7 +13,7 @@
     -o-box-shadow: 0 0 10px rgba(0,0,0,0.6); 
 }
 
-#sign-up {
+/* #sign-up {
     z-index: 15;
     position: absolute;
     z-index: 10;
@@ -23,23 +23,24 @@
     padding: 10px;
     text-align: center;
     width: auto;
-}
+} */
 
 .btn {
     z-index: 15;
     position: absolute;
     top: 5%;
     right: 5px;
-    background: #5e637a;
+    background: rgba(94, 99, 122, 0.9);
+    border: 1px solid rgba(60, 64, 79, 0.8);
     color: #ffffff;
     /* color: #313131; */
     width: auto;
     padding: 0.8em;
     text-align: left;
-    font-size: 14px;
+    font-size: 16px;
 }
 
 .btn:hover {
-    background: #3c404f;
+    background: rgba(60, 64, 79, 0.8);
     color: #ffffff;
 }

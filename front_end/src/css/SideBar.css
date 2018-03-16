@@ -47,9 +47,9 @@
     color: #313131;
 }
 
-.menu-item {
+/* .menu-item {
     font-size: 16px;
-}
+} */
 
 .fa-fw{
     width: 1.5em;
@@ -68,21 +68,23 @@
     text-align: center;
 }
 
-#weather {
+/* #weather {
     border-top: 1px solid #313131;
 }
 
 #statistics {
     border-bottom: 1px solid #313131;
-}
+} */
 
 .btn2 {
     color: #313131;
     width: 100%;
     border: none;
-    padding: 0.8em;
+    /* padding: 0.8em; */
     text-align: left;
     font-size: 14px;
+    padding: 1em 1.5em 0;
+    font-size: 1.15em;
 }
 
 .btn2:hover {
