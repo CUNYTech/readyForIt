@@ -11,6 +11,7 @@ import Tray from './Tray';
 import DefaultMapStyle  from '../layers/DefaultMapStyle';
 import { WatchWarnTilesSource, WatchWarnTilesLayer} from '../layers/WatchWarnTiles';
 import { RadarTilesSource, RadarTilesLayer } from '../layers/RadarTiles';
+import SideBar from './SideBar';
 
 const layers = [WatchWarnTilesLayer].reduce((p,c) => {
     return p.insert(p.size, c);
@@ -98,6 +99,7 @@ class Map extends Component {
     render(){
         return(
         <React.Fragment>
+        <SideBar/>
         <ReactMapGL
             ref={ map => this.mapRef = map }
             {...this.state.viewport}
