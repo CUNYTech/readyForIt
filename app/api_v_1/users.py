@@ -8,7 +8,7 @@ api = Blueprint('api', __name__, url_prefix='/api')
 
 @api.route('/register', methods=['POST'])
 def register():
-    form = UserForm()
+    form = UserForm(csrf_enabled=False)
     if form.validate():
         new_user = User.create(first_name=form.first_name.data, email=form.email.data,
                     phone_number=form.phone_number.data)
@@ -50,3 +50,7 @@ def email():
                         'message': 'Wow man good'})
     response.status_code = 200
     return response
+
+@api.route('/woof')
+def woof():
+    return "hello ghoul"

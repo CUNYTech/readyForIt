@@ -7,7 +7,7 @@ main = Blueprint('main', __name__)
 
 @main.route('/', methods=['GET'])
 def index():
-    form = UserForm()
+    form = UserForm(csrf_enabled=False)
     return render_template('index.html', form=form)
 
 
