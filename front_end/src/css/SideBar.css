@@ -22,10 +22,14 @@
     background: #bdc3c7;
 }
 
+.menu{
+    width: 250px !important;
+}
+
 /* General sidebar styles */
 .bm-menu {
     background: #ffffff;
-    padding: 2.5em 1.5em 0;
+    /* padding: 2.5em 1.5em 0; */
     font-size: 1.15em;
 }
    
@@ -33,12 +37,6 @@
 .bm-morph-shape {
     fill: #373a47;
 }
-
-/* Wrapper for item list
-.bm-item-list {
-    color: #b8b7ad;
-    padding: 0.8em;
-} */
 
 /* Styling of overlay */
 .bm-overlay {
@@ -66,6 +64,17 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
+.menu h1 {
+    text-align: center;
+}
+
+#weather {
+    border-top: 1px solid #313131;
+}
+
+#statistics {
+    border-bottom: 1px solid #313131;
+}
 .menu a {
     text-decoration: none;
     padding: 0.8em;
@@ -79,3 +88,27 @@
 .menu a:hover {
     color: #0c55f4;
 }
+
+#sign-up {
+    font-size: 20px;
+    margin-left: 20px;
+}
+
+#social {
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    /* height: 100px; */
+}
+
+#social a {
+    display: inline-block;
+    font-size: 24px;
+    padding: 0 20px;
+    margin-left: 10px;
+  }
+  
+  #social p {
+    margin-left: 5px;
+    font-size: 10px;
+  }
