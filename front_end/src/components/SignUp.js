@@ -37,10 +37,6 @@ class SignUp extends Component {
           body: data,
         });
     }
-    // handleClick(e){
-    //     this.openModal;
-    //     this.props.handler;
-    // }
 
     render () {
         return (

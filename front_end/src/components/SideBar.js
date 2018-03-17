@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import SignUp from './SignUp';
+import Weather from './Weather';
 import {slide as Menu} from 'react-burger-menu';
 
 import '../css/SideBar.css';
@@ -33,10 +34,10 @@ class SideBar extends Component {
                 onStateChange={(state) => this.handleStateChange(state)}
             >
                 <h1>ReadyForIt</h1>
-                <button className="btn2" id="weather"><i className="fa fa-fw fa-cloud"></i><span>Weather Updates</span></button>
-                <button className="btn2" id="donations" href=""><i className="fa fa-fw fa-ambulance"></i><span>Donations</span></button>
-                <button className="btn2"id="people-say" href=""><i className="fa fa-fw fa-comments"></i><span>People Say</span></button>
-                <button className="btn2"id="statistics" href=""><i className="fa fa-fw fa-history"></i><span>Statistics</span></button>
+                <Weather />
+                <button className="btn2" id="donations"><i className="fa fa-fw fa-ambulance"></i><span>Donations</span></button>
+                <button className="btn2" id="people-say"><i className="fa fa-fw fa-comments"></i><span>People Say</span></button>
+                <button className="btn2" id="statistics"><i className="fa fa-fw fa-history"></i><span>Statistics</span></button>
                 <SignUp handler={this.handler}/>
                 <div id="social">
                     <a href="/" className="fa fa-fw fa-facebook"></a>

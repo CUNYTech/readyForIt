@@ -33,19 +33,6 @@
     background: rgba(0, 0, 0, 0.2);
 }
 
-@media(max-width: 48em){
-    .modal{
-        left: 15%;
-    }
-}
-
-@media(max-width: 30em){
-    .modal{
-        left: 1%;
-        width: 360px;
-    }
-}
-
 /* .btn {
     z-index: 15;
     position: absolute;
@@ -94,18 +81,37 @@
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
-  }
+}
   
-  .cancelbtn {
+.cancelbtn {
     background-color: #e7e7e7; /* Gray */ 
     color: black;
-  } 
-  .cancelbtn:hover {
+} 
+.cancelbtn:hover {
     background-color: #bababa;
-  }
-  .signupbtn {
+}
+.signupbtn {
     background-color: #555555; /* Black */
-  } 
-  .signupbtn:hover {
+} 
+.signupbtn:hover {
     background-color: #333333;
-  }
+}
+
+@media(max-width: 48em){
+    .modal{
+        left: 15%;
+    }
+}
+
+@media(max-width: 30em){
+    .modal{
+        left: 0.5%;
+        top: 15%;
+        width: 350px;
+        padding: 10px;
+        height: 380px;
+    }
+    .form label{
+        line-height: 1rem;
+    }
+}
