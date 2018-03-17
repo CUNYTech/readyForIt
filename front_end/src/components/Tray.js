@@ -52,7 +52,8 @@ class Tray extends Component {
         return(
             <div className='tray'>
                 <div className='trayHeader'>
-                    <div onClick={this._handleTrayToggle}>toggle</div>
+                    {/* <div onClick={this._handleTrayToggle}>toggle</div> */}
+                    <button className="button" onClick={this._handleTrayToggle}>Show Info</button>
                 </div>
                 <div className={`trayBody ${this.state.toggle ? '' : 'hidden'}`}>
                     {cards}
