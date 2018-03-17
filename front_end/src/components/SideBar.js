@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import SignUp from './SignUp';
 import {slide as Menu} from 'react-burger-menu';
 
 import '../css/SideBar.css';
@@ -9,9 +9,9 @@ class SideBar extends Component {
     constructor(props){
         super(props);
         this.state = {
-            showSignUp: props,
             menuOpen: false
         }
+        this.handler = this.handler.bind(this);
     }
 
     handleStateChange (state) {
@@ -19,12 +19,13 @@ class SideBar extends Component {
     }
       
     // This can be used to close the menu, e.g. when a user clicks a menu item
-    handleClick(){
-        this.setState({showSignUp: true}); 
-        this.setState({menuOpen: false});
-        
+    handler(e) {
+        e.preventDefault();    
+        this.setState({
+            menuOpen: false
+        });
     }
-    render (state) {
+    render () {
         return (
             <Menu 
                 className="menu"
@@ -36,7 +37,7 @@ class SideBar extends Component {
                 <button className="btn2" id="donations" href=""><i className="fa fa-fw fa-ambulance"></i><span>Donations</span></button>
                 <button className="btn2"id="people-say" href=""><i className="fa fa-fw fa-comments"></i><span>People Say</span></button>
                 <button className="btn2"id="statistics" href=""><i className="fa fa-fw fa-history"></i><span>Statistics</span></button>
-                
+                <SignUp handler={this.handler}/>
                 <div id="social">
                     <a href="/" className="fa fa-fw fa-facebook"></a>
                     <a href="/" className="fa fa-fw fa-twitter"></a>

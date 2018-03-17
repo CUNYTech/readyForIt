@@ -12,7 +12,7 @@ import DefaultMapStyle  from '../layers/DefaultMapStyle';
 import { WatchWarnTilesSource, WatchWarnTilesLayer} from '../layers/WatchWarnTiles';
 import { RadarTilesSource, RadarTilesLayer } from '../layers/RadarTiles';
 import SideBar from './SideBar';
-import SignUp from './SignUp';
+
 
 const layers = [WatchWarnTilesLayer].reduce((p,c) => {
     return p.insert(p.size, c);
@@ -109,7 +109,7 @@ class Map extends Component {
                 mapboxApiAccessToken={MAPBOX_TOKEN}
                 onViewportChange={this._onViewportChange}
             />
-            <SignUp/>
+            
             <LayersMenu 
                 layers={this.state.layers}
                 onLayerMenuClick={this._onLayerMenuClick}

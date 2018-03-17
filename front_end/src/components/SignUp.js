@@ -1,18 +1,7 @@
 import React, {Component} from 'react';
 import '../css/SignUp.css';
-import ReactDOM from 'react-dom';
+// import ReactDOM from 'react-dom';
 import Modal from 'react-modal';
-
-// const customStyles = {
-//   content : {
-//     top                   : '50%',
-//     left                  : '50%',
-//     right                 : 'auto',
-//     bottom                : 'auto',
-//     marginRight           : '-50%',
-//     transform             : 'translate(-50%, -50%)'
-//   }
-// };
 
 class SignUp extends Component {
     constructor() {
@@ -26,8 +15,6 @@ class SignUp extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    
-     
     openModal() {
         this.setState({modalIsOpen: true});
     }
@@ -50,11 +37,15 @@ class SignUp extends Component {
           body: data,
         });
     }
+    // handleClick(e){
+    //     this.openModal;
+    //     this.props.handler;
+    // }
 
     render () {
         return (
             <div id="element">
-            <button onClick={this.openModal} className="btn">Sign Up</button>
+            <button onClick={this.openModal} className="btn2 signup">Sign Up</button>
             <Modal
                 isOpen={this.state.modalIsOpen}
                 ariaHideApp={false}
@@ -80,12 +71,12 @@ class SignUp extends Component {
                 <input id="tel" name="tel" type="tel" />
 
                 <label htmlFor="tel">Enter your zip code</label>
-                <input id="zipcode" name="zipcode" type="text" pattern="[0-9]{5}" />
+                <input id="zipcode" name="zipcode" type="text" pattern="(\d{5}([\-]\d{4})?)" />
                 <div className="clearfix">
                     <button 
                         onClick={this.closeModal}
                         className="cancelbtn">close</button>
-                    <button class="signupbtn">Submit</button>
+                    <button className="signupbtn">Submit</button>
                 </div>
             </form>
         </Modal>
