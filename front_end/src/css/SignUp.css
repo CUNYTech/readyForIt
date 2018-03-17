@@ -44,3 +44,82 @@
     background: rgba(60, 64, 79, 0.8);
     color: #ffffff;
 }
+
+.modal {
+    /* position: absolute;
+    top:  20%;
+    left:  20%;
+    border: 1px solid #ccc;
+    background:  #fff;
+    overflow:  auto;
+    -webkit-overflow-scrolling: touch;
+    border-radius: 4px;
+    outline:  none;
+    padding:  20px; */
+    margin: auto;
+    position: absolute;
+    padding: 15px;
+    top: 20%;
+    left:  20%;
+    width: 400px;
+    height: 400px;
+    background: #ffffff;
+    box-shadow: 0 0 10px rgba(0,0,0,0.6);
+    -moz-box-shadow: 0 0 10px rgba(0,0,0,0.6);
+    -webkit-box-shadow: 0 0 10px rgba(0,0,0,0.6);
+    -o-box-shadow: 0 0 10px rgba(0,0,0,0.6);
+}
+
+.modal h2{
+    color: #313131 !important;
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.form {
+     
+
+}
+
+.form input {
+    padding: 10px;
+    width: 94%;
+    font-size: 12px;
+}
+
+.clearfix {
+    margin-top: 10px;
+}
+
+.cancelbtn, .signupbtn {
+    width: 50%;
+    /* float: left; */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+  }
+  
+  .cancelbtn {
+    background-color: #e7e7e7; /* Gray */ 
+    color: black;
+  } 
+  .cancelbtn:hover {
+    background-color: #bababa;
+  }
+  .signupbtn {
+    background-color: #555555; /* Black */
+  } 
+  .signupbtn:hover {
+    background-color: #333333;
+  }
