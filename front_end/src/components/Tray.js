@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import debounce from '../helpers/debounce';
 
 const COLORS = {
     'GL' : '#b2c2de',
@@ -17,16 +18,19 @@ class Tray extends Component {
         const toggle = !this.state.toggle;
         this.setState({toggle});
     }
+    
 
     componentWillUpdate() {
         if(JSON.stringify(this.props.bounds) !== JSON.stringify(this.state.bounds)){
-            console.log('update bounds');
-            this.setState({bounds: this.props.bounds}, () => this.getWatchWarnInBound());
+            const zoom = this.props.bounds[4];
+            if(zoom >= 8){ //zoom level
+                this.setState({bounds: this.props.bounds}, () => this.getWatchWarnInBound());
+            }
         }
     }
 
     //get all watches and warnings in viewport
-    getWatchWarnInBound = () => {
+    getWatchWarnInBound = debounce(() => {
         if(this.state.bounds){
             const bounds = this.state.bounds;
             fetch(`https://idpgis.ncep.noaa.gov/arcgis/rest/services/NWS_Forecasts_Guidance_Warnings/watch_warn_adv/MapServer/1/query?f=json&returnGeometry=true&spatialRel=esriSpatialRelIntersects&maxAllowableOffset=0&geometry={"xmin":${bounds[0]},"ymin":${bounds[1]},"xmax":${bounds[2]},"ymax":${bounds[3]},"spatialReference":{"wkid":4326}&geometryType=esriGeometryEnvelope&inSR=4326&outFields=*&outSR=4326`)
@@ -36,7 +40,7 @@ class Tray extends Component {
                     this.setState({watchwarn});
             });
         }
-    }
+    },2000);
 
     render(){
         const cards = this.state.watchwarn.map(i => {
@@ -48,12 +52,16 @@ class Tray extends Component {
                     <p><a target='_blank' href={url}>{warnid}</a></p>
                 </div>
             )
-        })
+        });
+
+        const zoom = this.props.bounds[4];
+        //hide tray, zoom is too out
+        const zoomThreshold = zoom >= 8;
         return(
-            <div className='tray'>
+            <div className={`tray ${zoomThreshold ? '' : 'hidden'}`}>
                 <div className='trayHeader'>
                     {/* <div onClick={this._handleTrayToggle}>toggle</div> */}
-                    <button className="button" onClick={this._handleTrayToggle}>Show Info</button>
+                    <button className='button' onClick={this._handleTrayToggle}>{zoomThreshold ? 'Show Info' : null}</button>
                 </div>
                 <div className={`trayBody ${this.state.toggle ? '' : 'hidden'}`}>
                     {cards}

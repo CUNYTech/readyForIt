@@ -14,7 +14,7 @@ import { RadarTilesSource, RadarTilesLayer } from '../layers/RadarTiles';
 import SideBar from './SideBar';
 
 
-const layers = [WatchWarnTilesLayer].reduce((p,c) => {
+const layers = [WatchWarnTilesLayer, RadarTilesLayer].reduce((p,c) => {
     return p.insert(p.size, c);
 },DefaultMapStyle.get('layers'));
 
@@ -40,17 +40,13 @@ class Map extends Component {
             height: window.innerHeight,
             latitude: 40.7128,
             longitude: -74.0060,
-            zoom: 8
+            zoom: 7
         },
         watchwarn : [],
         bounds: []
     };
 
     componentDidMount() {
-        const bound = this.mapRef.getMap().getBounds();
-        const bounds = [bound._ne.lng, bound._ne.lat, bound._sw.lng, bound._sw.lat];
-        this.setState({bounds});
-
         window.addEventListener('resize', this._resize);
         this._resize();
     }
@@ -73,6 +69,10 @@ class Map extends Component {
     _onViewportChange = viewport => {
         //this.getWatchWarnInBound(viewport);
         this.setState({viewport});
+        const bound = this.mapRef.getMap().getBounds();
+        const bounds = [bound._ne.lng, bound._ne.lat, bound._sw.lng, bound._sw.lat, this.state.viewport.zoom];
+
+        this.setState({bounds});
     };
 
 
