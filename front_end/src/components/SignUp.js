@@ -17,6 +17,7 @@ class SignUp extends Component {
 
     openModal() {
         this.setState({modalIsOpen: true});
+        this.props.handlerCloseSideBar();
     }
      
     afterOpenModal() {

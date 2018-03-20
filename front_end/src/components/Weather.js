@@ -17,6 +17,7 @@ class Weather extends Component {
 
     openModal() {
         this.setState({modalIsOpen: true});
+        this.props.handlerCloseSideBar();
     }
      
     afterOpenModal() {
@@ -41,7 +42,7 @@ class Weather extends Component {
     render () {
         return (
             <div id="element">
-                <button 
+                <button  
                     className="btn2" 
                     id="weather"
                     onClick={this.openModal}>

@@ -18,6 +18,10 @@ class SideBar extends Component {
     handleStateChange (state) {
         this.setState({menuOpen: state.isOpen})  
     }
+
+    handlerCloseSideBar = () => {
+        this.setState({menuOpen: false});
+    }
       
     // This can be used to close the menu, e.g. when a user clicks a menu item
     handler(e) {
@@ -34,11 +38,13 @@ class SideBar extends Component {
                 onStateChange={(state) => this.handleStateChange(state)}
             >
                 <h1>ReadyForIt</h1>
-                <Weather />
-                <button className="btn2" id="donations"><i className="fa fa-fw fa-ambulance"></i><span>Donations</span></button>
-                <button className="btn2" id="people-say"><i className="fa fa-fw fa-comments"></i><span>People Say</span></button>
-                <button className="btn2" id="statistics"><i className="fa fa-fw fa-history"></i><span>Statistics</span></button>
-                <SignUp handler={this.handler}/>
+                <Weather handlerCloseSideBar={this.handlerCloseSideBar}/>
+                <button onClick={this.handlerCloseSideBar} className="btn2" id="donations"><i className="fa fa-fw fa-ambulance"></i><span>Donations</span></button>
+                <button onClick={this.handlerCloseSideBar} className="btn2" id="people-say"><i className="fa fa-fw fa-comments"></i><span>People Say</span></button>
+                <button onClick={this.handlerCloseSideBar} className="btn2" id="statistics"><i className="fa fa-fw fa-history"></i><span>Statistics</span></button>
+                <SignUp 
+                    handler={this.handler} 
+                    handlerCloseSideBar={this.handlerCloseSideBar}/>
                 <div id="social">
                     <a href="/" className="fa fa-fw fa-facebook"></a>
                     <a href="/" className="fa fa-fw fa-twitter"></a>
