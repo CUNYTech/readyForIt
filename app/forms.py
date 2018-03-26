@@ -20,6 +20,6 @@ class UserForm(FlaskForm):
     phone_number = StringField('Phone Number',
                                validators=[Length(min=5, message="Invalid Number")])
     email = StringField('email', validators=[DataRequired(),
-                        Email("This is not a valid email"), validate_email])
+                                             Email("This is not a valid email"), validate_email])
     zip_code = StringField('Zip Code', validators=[Regexp(r'^\d{5}$',
-                            message="Please enter valid 5 digit zipcode")])
+                                                          message="Please enter valid 5 digit zipcode")])
