@@ -4,7 +4,7 @@ https://www.twilio.com/docs/quickstart/python/sms
 """
 import os
 from twilio.rest import Client
-from Threading import Thread
+from threading import Thread
 
 
 account_sid = os.environ.get("SID")
@@ -15,7 +15,7 @@ def send_sms(message=None, phone=os.environ.get("PHONE")):
     """Send messages to Users.
         Args:
             message (str): Message to be send to user 
-            phone (str): Phone number to send
+            phone (str): Phone number to send to
     """
     client = Client(account_sid, auth_token)
 
@@ -28,6 +28,11 @@ def send_sms(message=None, phone=os.environ.get("PHONE")):
 
 
 def send_async_sms(message=None, phone=None):
+    """Sends messages asynchronously for now using Threads
+        Args:
+            message (str): Message to be sent to user
+            phone (str): Phone numberto send to
+    """
     thr = Thread(target=send_sms, args=())
     thr.start()
     return thr
