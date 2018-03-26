@@ -20,6 +20,9 @@ export const RadarTilesLayer = fromJS({
     minzoom: 0,
     maxzoom: zoomThreshold,
     interactive: true,
-    toggle: true
+    toggle: true,
+    paint: {
+        "raster-opacity": 0.5
+    }
 });
 
