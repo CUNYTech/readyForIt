@@ -6,6 +6,18 @@ db = SQLAlchemy()
 
 
 def create_app(config):
+    """Application factory style creation of our App as seen
+    This pattern is recommended on the Flask official site. 
+    http://flask.pocoo.org/docs/0.12/patterns/appfactories/
+
+    Args:
+        config (str): name of configuration file to receive settings from
+                      config.py file ex: config.DevelopmentConfig
+
+    """
+
+    # Currently sets tempalte and static folder to build. Which is where
+    # Our react front end will be placed after running node build.
     app = Flask(__name__, template_folder="build", static_folder="build/static")
     app.config.from_object(config)
     db.init_app(app)
@@ -14,7 +26,10 @@ def create_app(config):
     from app.api_v_1.users import api as api_users
     app.register_blueprint(api_users)
 
-    # Temporary fix until Nginx
+    # Returns specific static files that Flask could not find by itself
+    # It would be better to have Nginx or another webserver to serve
+    # Static Assets but these files are served to a CDN then cached
+    # so will be rarely invoked
 
     @app.route('/index.html')
     def serve_html():

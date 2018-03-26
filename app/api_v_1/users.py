@@ -8,6 +8,9 @@ api = Blueprint('api', __name__, url_prefix='/api')
 
 @api.route('/register', methods=['POST'])
 def register():
+    """Api route for validating and saving Our users into database
+    Additionalyl sends email and text upon User creations
+    """
     form = UserForm(csrf_enabled=False)
     if form.validate():
         new_user = User.create(first_name=form.first_name.data, email=form.email.data,
@@ -53,4 +56,7 @@ def email():
 
 @api.route('/woof')
 def woof():
+    """Api to bing our Heroku server to prevent it from sleeping
+    every 30 minuites of inactivity. =)
+    """
     return "hello ghoul"

@@ -21,7 +21,7 @@ var/
 *.egg-info/
 .installed.cfg
 *.egg
-
+*.pyc
 # Installer logs
 pip-log.txt
 pip-delete-this-directory.txt
@@ -53,6 +53,6 @@ coverage.xml
 docs/_build/
 
 *.DS_Store
-
+.vscode/
 BoilerPlateFlask/
 node_modules/
