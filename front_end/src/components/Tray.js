@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import CurrentWeather from './CurrentWeather'
 import debounce from '../helpers/debounce';
 
 const COLORS = {
@@ -43,7 +44,15 @@ class Tray extends Component {
     },2000);
 
     render(){
-        const cards = this.state.watchwarn.map(i => {
+        //get unique phenom
+        const filteredWatchWarn = this.state.watchwarn.reduce((p,c)=>{
+            if(p.every(i => i.attributes.phenom !== c.attributes.phenom)){
+                p = [...p, c];
+            } 
+            return p;
+        },[])
+
+        const cards = filteredWatchWarn.map(i => {
             const { phenom, prod_type, wfo, url, warnid } = i.attributes;
             const style = {background: COLORS[phenom]}
             return(
@@ -57,13 +66,16 @@ class Tray extends Component {
         const zoom = this.props.bounds[4];
         //hide tray, zoom is too out
         const zoomThreshold = zoom >= 8;
+
+        const Weather = zoomThreshold ? <CurrentWeather lat={(this.props.viewport.latitude).toString()} lng={(this.props.viewport.longitude).toString()}/> : null;
         return(
             <div className={`tray ${zoomThreshold ? '' : 'hidden'}`}>
+                {Weather}
                 <div className='trayHeader'>
                     {/* <div onClick={this._handleTrayToggle}>toggle</div> */}
                     <button className='button' onClick={this._handleTrayToggle}>{zoomThreshold ? 'Show Info' : null}</button>
                 </div>
-                <div className={`trayBody ${this.state.toggle ? '' : 'hidden'}`}>
+                <div className={`trayBody ${this.state.toggle ? '' : 'hidden'}`} id="card">
                     {cards}
                 </div>
             </div>

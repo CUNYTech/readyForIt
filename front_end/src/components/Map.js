@@ -114,7 +114,7 @@ class Map extends Component {
                 layers={this.state.layers}
                 onLayerMenuClick={this._onLayerMenuClick}
             />
-            <Tray bounds={this.state.bounds}/>
+            <Tray bounds={this.state.bounds} viewport={this.state.viewport}/>
         </React.Fragment>
         )
     }
