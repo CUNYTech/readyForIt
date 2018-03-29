@@ -3,6 +3,7 @@ from app.models import User
 from app import db
 from emails import send_email
 from app.forms import UserForm
+import sys
 api = Blueprint('api', __name__, url_prefix='/api')
 
 
@@ -14,15 +15,16 @@ def register():
     form = UserForm(csrf_enabled=False)
     if form.validate():
         new_user = User.create(first_name=form.first_name.data, email=form.email.data,
-                    phone_number=form.phone_number.data)
-        
-        response = jsonify({'success': form.first_name.data, 'message': 'Success'})
+                               phone_number=form.phone_number.data)
+
+        response = jsonify(
+            {'success': form.first_name.data, 'message': 'Success'})
         if new_user.email == "marcuscrowder20@gmail.com" and new_user.phone_number == "3476408850":
             message = "Hello welcome to ready for it"
             email = "marcuscrowder20@gmail.com"
             print("Where they at doe")
             send_email(message, email)
-        
+
         new_user.delete()
         response.status_code = 201
         return response
@@ -35,12 +37,16 @@ def register():
 
 @api.route('/test', methods=['POST'])
 def test():
-    if True:
-        a = request.get_json()
-        return jsonify(a)
+    form = UserForm(csrf_enabled=False)
+    if form.validate():
+        print(form.data, file=sys.stderr)
+        response = jsonify(
+            {'success': 'Cool', 'message': 'Success Finally man'})
+        response.status_code = 200
+    else:
+        response = jsonify({'success': 'Cool', 'message': form.errors})
+        response.status_code = 400
 
-    response = jsonify({'error': 'bad request', 'message': 'missing args'})
-    response.status_code = 400
     return response
 
 
@@ -54,9 +60,14 @@ def email():
     response.status_code = 200
     return response
 
-@api.route('/woof')
+
+@api.route('/woof', methods=['GET', 'POST'])
 def woof():
     """Api to bing our Heroku server to prevent it from sleeping
     every 30 minuites of inactivity. =)
     """
-    return "hello ghoul"
+    print(request.form.get("name"))
+    response = jsonify({'success': 'You done good',
+                        'message': 'Wow man good'})
+    response.status_code = 200
+    return response
