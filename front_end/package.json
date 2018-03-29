@@ -53,9 +53,9 @@
   },
   "scripts": {
     "start": "node scripts/start.js",
-    "build":
-      "node scripts/build.js && rm -rf ../app/build && mv build ../app/build",
-    "build2": "node scripts/build.js && rsync -r -I build ../app/build",
+    "build": "node scripts/build.js && npm run sync",
+    "sync":
+      "rm -rf ../app/build/static && rsync -r --ignore-times build/ ../app/build/ && rm -rf build",
     "test": "node scripts/test.js --env=jsdom",
     "build3": "node scripts/build.js",
     "both":

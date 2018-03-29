@@ -12,7 +12,7 @@ API_KEY = os.environ.get("MAILGUN_API_KEY")
 MAILGUN_DOMAIN = os.environ.get("MAILGUN_DOMAIN")
 
 
-def send_simple_message(message, email):
+def send_simple_message(html, email):
     """This function sends a simple email to our new and old clients.
         Args:
             message (str): The message that will be sent out
@@ -22,15 +22,16 @@ def send_simple_message(message, email):
     response = requests.post(
         "https://api.mailgun.net/v3/{}/messages".format(MAILGUN_DOMAIN),
         auth=("api", API_KEY),
-        data={"from": "readyforit@example.com",
+        data={"from": "support@readyforit.com",
               "to": "{}".format(email),
               "subject": "Hello",
-              "text": message})
+              "text": "Your mail does not support html",
+              "html": html})
 
     print(response.text)
 
 
-def send_email(message, email):
+def send_email(html, email):
     """Currently used to send emails via threads
     Better idea would be to use celery or another task framework
      for servers with more traffic.
@@ -41,6 +42,6 @@ def send_email(message, email):
             A thread is returned but not currently handled.
 
     """
-    thr = Thread(target=send_simple_message, args=[message, email])
+    thr = Thread(target=send_simple_message, args=[html, email])
     thr.start()
     return thr
