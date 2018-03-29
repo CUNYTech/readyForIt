@@ -77,16 +77,15 @@ class SignUp extends Component {
               type="text"
               placeholder="name"
               title="Please enter valid name"
-              pattern="[a-zA-z]{1,65}"
+              required
             />
 
             <label htmlFor="email">Enter your email</label>
             <input
               id="email"
               name="email"
-              pattern="^[\w+-]{5,70}@[\w.-]+\.?\w+$"
               type="email"
-              placeholder="readyforit@example.com"
+              placeholder="youremail@example.com"
               title="Please us a valid email"
             />
 
