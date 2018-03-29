@@ -1,0 +1,56 @@
+.weather {
+    margin: auto;
+    position: absolute;
+    padding: 15px;
+    padding-top: 0;
+    top: 0;
+    left:  20%;
+    width: 60%;
+    height: 100%;
+    background: #ffffff;
+    box-shadow: 0 0 10px rgba(0,0,0,0.6);
+    -moz-box-shadow: 0 0 10px rgba(0,0,0,0.6);
+    -webkit-box-shadow: 0 0 10px rgba(0,0,0,0.6);
+    -o-box-shadow: 0 0 10px rgba(0,0,0,0.6);
+    overflow:  auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.weatherDisplay {
+    text-align: center;
+}
+
+.weather:focus{
+    outline: 0;
+}
+
+.weather h2{
+    color: #313131 !important;
+    text-align: center;
+}
+
+.buttonClose {
+    border: none;
+    font-size: 20px;
+}
+
+
+.buttonClose .fa-fw{
+    position: absolute; 
+    right: 10px;
+}
+
+@media(max-width: 48em){
+    .weather{
+        left: 15%;
+    }
+}
+
+@media(max-width: 30em){
+    .weather{
+        left: 1.5%;
+        top: 15%;
+        width: 90%;
+        padding: 10px;
+    }
+}

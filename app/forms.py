@@ -4,7 +4,7 @@
 
 from flask_wtf import FlaskForm
 from wtforms import StringField, ValidationError
-from wtforms.validators import DataRequired, Email, Length
+from wtforms.validators import DataRequired, Email, Length, Regexp
 from app.models import User
 
 
@@ -16,8 +16,10 @@ def validate_email(form, field):
 
 
 class UserForm(FlaskForm):
-    first_name = StringField('First Name', validators=[DataRequired()])
-    phone_number = StringField('Phone Number',
+    first_name = StringField('first_name', validators=[DataRequired(), Length(min=2, max=70, message="Invalid Name")])
+    phone_number = StringField('phone_number',
                                validators=[Length(min=5, message="Invalid Number")])
     email = StringField('email', validators=[DataRequired(),
-                        Email("This is not a valid email"), validate_email])
+                                             Email("This is not a valid email"), validate_email])
+    zip_code = StringField('zip_code', validators=[Regexp(r'^\d{5}$',
+                                                          message="Please enter valid 5 digit zipcode")])

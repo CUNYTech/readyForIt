@@ -1,5 +1,6 @@
 from app import create_app, db
 from app.models import User
+from app.forms import UserForm
 from flask_migrate import Migrate
 import os
 import unittest
@@ -10,7 +11,12 @@ migrate = Migrate(app, db)
 
 @app.shell_context_processor
 def make_shell_context():
-    return dict(app=app, db=db, User=User)
+    """Creates shell context for our shell session when using Flask shell
+    Gives us access to our app, database and User Model in terminal.
+    http://flask.pocoo.org/docs/0.12/cli/#cli
+
+    """
+    return dict(app=app, db=db, User=User, UserForm=UserForm)
 
 
 @app.cli.command()
