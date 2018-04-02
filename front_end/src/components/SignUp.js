@@ -110,7 +110,7 @@ class SignUp extends Component {
             />
             <div className="clearfix">
               <button onClick={this.closeModal} className="cancelbtn">
-                close
+                Close
               </button>
               <button className="signupbtn">Submit</button>
             </div>
