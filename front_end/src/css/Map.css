@@ -110,3 +110,11 @@ button:focus {
     display: none;
 }
 
+.location-search{
+    position: absolute;
+    z-index: 10;
+    margin-top: 10px;
+    left: 50%;
+    width: 50%;
+    transform: translate(-50%);
+}

@@ -6,12 +6,16 @@ import '../css/Map.css';
 
 import LayersMenu from './LayersMenu';
 import Tray from './Tray';
+import SideBar from './SideBar';
+import LocationSearch from './LocationSearch';
+
+import {getGeoLocation} from '../helpers/geolocation';
 
 //set up sources and styles for layers
 import DefaultMapStyle  from '../layers/DefaultMapStyle';
 import { WatchWarnTilesSource, WatchWarnTilesLayer} from '../layers/WatchWarnTiles';
 import { RadarTilesSource, RadarTilesLayer } from '../layers/RadarTiles';
-import SideBar from './SideBar';
+
 
 
 const layers = [WatchWarnTilesLayer, RadarTilesLayer].reduce((p,c) => {
@@ -49,10 +53,23 @@ class Map extends Component {
     componentDidMount() {
         window.addEventListener('resize', this._resize);
         this._resize();
+        //zoom to user location
+        getGeoLocation()
+            .then(latLng => this.zoomToLocation(latLng))
+            .catch(error=> console.error(error));
     }
 
     componentWillUnmount() {
         window.removeEventListener('resize', this._resize);
+    }
+
+    zoomToLocation = (latLng,zoom = 12) => {
+        //latLng is an object with lat and lng
+        const viewport = this.state.viewport;
+        viewport.latitude = latLng.lat;
+        viewport.longitude = latLng.lng;
+        viewport.zoom = zoom;
+        this.setState({viewport});
     }
 
     //window resize
@@ -96,12 +113,12 @@ class Map extends Component {
         layers[id] = !layers[id];
         this.setState({layers}, () => this.updateVisibility())
     }
-    
 
     render(){
         return(
         <React.Fragment>
             <SideBar/>
+            <LocationSearch zoomToLocation={this.zoomToLocation}/>
             <ReactMapGL
                 ref={ map => this.mapRef = map }
                 {...this.state.viewport}

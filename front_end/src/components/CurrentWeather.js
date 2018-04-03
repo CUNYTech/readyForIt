@@ -3,13 +3,24 @@ import React,  { Component } from 'react';
 // import axios from 'axios';
 import ReactWeather from 'react-open-weather';
 
-
+import { getGeoLocation } from '../helpers/geolocation';
 
 class CurrentWeather extends Component {
+  state = {
+    lon: "-73.935242",
+    lat: "40.730610"
+  }
 
-   render() {   
-    const lon = this.props.lon || "-73.935242";
-    const lat = this.props.lat || "40.730610";
+  componentDidMount(){
+    getGeoLocation().then(latlng => {
+      this.setState({
+        lat: latlng[0].toFixed(10),
+        lon: latlng[1].toFixed(10)
+      });
+    }).catch(error=> console.error(error));
+  } 
+  
+  render() {   
     return (
       <ReactWeather
         forecast="today"
@@ -18,8 +29,8 @@ class CurrentWeather extends Component {
         // type="city"
         // city="Manhattan"
         type="geo"
-        lon={lon}
-        lat={lat}
+        lon={this.state.lon}
+        lat={this.state.lat}
     />     
     );
   }  
