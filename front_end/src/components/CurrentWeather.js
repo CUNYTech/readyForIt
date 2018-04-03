@@ -28,9 +28,9 @@ class CurrentWeather extends Component {
         apikey="f0c751300d9340ac8c9202734182503 "
         // type="city"
         // city="Manhattan"
-        type="geo"
-        lon={this.state.lon}
-        lat={this.state.lat}
+        type="auto"
+        //lon={this.state.lon}
+        //lat={this.state.lat}
     />     
     );
   }  

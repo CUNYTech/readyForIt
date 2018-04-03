@@ -1,0 +1,49 @@
+<html>
+	<head><title>current temperature</title></head>
+<body style="text-align:center;">
+	<!--
+		<p> the current temperature (F) is : {{ temp }} degrees. </p>
+	-->
+	<table style="background-color:Gainsboro;
+				display: inline-block;
+				border-radius:5px;
+				padding-left:10px;
+				padding-right:10px;
+				padding-top:5px;
+				padding-bottom: 5px;
+				text-align:left;
+				max-height: 200px;
+				">
+		<tr style="color:white;text-align:center;background-color: DarkSlateGray;display: inline-block;">
+			<th> {{ time }} </th>
+			
+		</tr>
+
+		<tr >
+			<th> {{ night }}</th>
+			<th>current temp: <br />{{ temp }} °F</th>
+	    	<th>current himidity: <br />{{ hum }} %</th> 
+	    	<th>current pressure: <br />{{ pressure }} hpa</th>
+			<th>current min temp: <br />{{ temp_min }} °F</th>  	
+			<th>current max temp: <br />{{ temp_max }} °F</th>
+
+	  	</tr>
+	<!--
+	{% for value in values %}
+		<p> {{value}}  {{values[value]}}</p>
+	
+	{% endfor %}
+	-->
+	<img id="nighttime" src="/night.png">
+<script type="text/javascript">
+
+	var night = document.getElementById("nighttime").src; 
+	//if(time >= 18)
+	document.write(night);
+
+
+</script>
+</table>
+
+</body>
+</html>
