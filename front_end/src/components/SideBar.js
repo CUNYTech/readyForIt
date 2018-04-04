@@ -46,9 +46,9 @@ class SideBar extends Component {
                     handler={this.handler} 
                     handlerCloseSideBar={this.handlerCloseSideBar}/>
                 <div id="social">
-                    <a href="/" className="fa fa-fw fa-facebook"></a>
-                    <a href="/" className="fa fa-fw fa-twitter"></a>
-                    <a href="/" className="fa fa-fw fa-instagram"></a>
+                    <a href="/" className="fa fa-fw fa-facebook"><span>facebook</span></a>
+                    <a href="/" className="fa fa-fw fa-twitter"><span>twitter</span></a>
+                    <a href="/" className="fa fa-fw fa-instagram"><span>instagram</span></a>
                     <p>Copyright @ 2018 ReadyForIt. All rights reserved.</p>
                 </div>
             </Menu>
