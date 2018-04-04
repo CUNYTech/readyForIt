@@ -44,6 +44,7 @@ class SignUp extends Component {
       } else if (response.status === 201) {
         response.json().then(jsonData => {
           console.log(jsonData);
+          this.setState({modalIsOpen: false});
           // Handle object stored in jsonData.Message
         });
       }
