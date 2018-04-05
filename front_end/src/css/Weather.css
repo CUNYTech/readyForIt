@@ -55,3 +55,7 @@
         padding: 10px;
     }
 }
+
+.modal-overlay {
+    z-index: 10;
+}

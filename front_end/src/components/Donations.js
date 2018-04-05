@@ -69,7 +69,9 @@ class Donations extends Component {
                         ref={subtitle => this.subtitle = subtitle}
                         className="h2">
                     Donations</h2>
-                    
+                    <div className="weatherDisplay">
+                    <input type="search" placeholder={this.props.placeholderText} />
+                </div>
                 </div>
                 
             </Modal>
