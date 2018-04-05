@@ -118,8 +118,8 @@ class Map extends Component {
     render(){
         return(
         <React.Fragment>
-            <SideBar/>
             <LocationSearch zoomToLocation={this.zoomToLocation}/>
+            <SideBar/>
             <ReactMapGL
                 ref={ map => this.mapRef = map }
                 {...this.state.viewport}
