@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReactMapGL from 'react-map-gl';
-import { fromJS } from 'immutable';
+// import { fromJS } from 'immutable';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import '../css/Map.css';
 
@@ -102,6 +102,7 @@ class Map extends Component {
             const layerIndex = mapStyle.get('layers').findIndex(layer => layer.get('id') === id);
             //update layout
             visibility ? mapStyle = mapStyle.setIn(['layers',layerIndex,'layout','visibility'], 'visible') : mapStyle = mapStyle.setIn(['layers',layerIndex,'layout','visibility'], 'none');
+            return null
         })
 
         this.setState({ mapStyle });
@@ -117,8 +118,8 @@ class Map extends Component {
     render(){
         return(
         <React.Fragment>
-            <SideBar/>
             <LocationSearch zoomToLocation={this.zoomToLocation}/>
+            <SideBar/>
             <ReactMapGL
                 ref={ map => this.mapRef = map }
                 {...this.state.viewport}

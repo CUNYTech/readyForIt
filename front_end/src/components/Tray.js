@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import CurrentWeather from './CurrentWeather'
 import debounce from '../helpers/debounce';
 
 const COLORS = {

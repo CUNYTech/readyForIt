@@ -4,7 +4,8 @@ from emails import send_email
 from app.forms import UserForm
 import sys
 api = Blueprint('api', __name__, url_prefix='/api')
-
+import requests
+from bs4 import BeautifulSoup
 
 @api.route('/register', methods=['POST'])
 def register():
@@ -38,4 +39,36 @@ def test():
     response = jsonify({'success': 'good job', 'message': 'Pong'})
     response.status_code = 200
 
+    return response
+
+@api.route('/donations/<city>', methods=['GET'])
+def donations(city):
+    """Api route to collect donations from gofundme"""
+    url = "https://www.gofundme.com/emergency-accident-fundraising?term={}&country=US".format(city)
+    r=requests.get(url)
+    c=r.content
+
+    soup = BeautifulSoup(c, "html.parser")
+
+    all=soup.find_all("div", {"class": "js-fund-tile"})
+
+    # all[0].find("div", {"class": "tile-title"}).text
+
+    results = []
+
+    for item in all:
+        item_dict = {}
+        image = item.find("img", {"class": "tile-img"})
+        item_dict["image"] = image.attrs['src']
+        item_dict["title"] =item.find("div", {"class": "tile-title"}).text
+        item_dict["amount"] =item.find("div", {"class" : "tile-footer"}).text.split('\n')[1].rstrip()
+        item_dict["description"] =item.find("div", {"class": "tile-description"}).text.strip()
+        link = item.find("a", {"class": "read-more"})
+        item_dict["link"] = link.attrs['href']
+        #adding item to dictinary
+        results.append(item_dict)
+    
+    response = jsonify({'data': results})
+    response.status_code = 200
+    
     return response

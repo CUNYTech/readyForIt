@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import SignUp from './SignUp';
 import Weather from './Weather';
+import Donations from './Donations';
 import {slide as Menu} from 'react-burger-menu';
 
 import '../css/SideBar.css';
@@ -39,16 +40,16 @@ class SideBar extends Component {
             >
                 <h1>ReadyForIt</h1>
                 <Weather handlerCloseSideBar={this.handlerCloseSideBar}/>
-                <button onClick={this.handlerCloseSideBar} className="btn2" id="donations"><i className="fa fa-fw fa-ambulance"></i><span>Donations</span></button>
+                <Donations handlerCloseSideBar={this.handlerCloseSideBar}/>
                 <button onClick={this.handlerCloseSideBar} className="btn2" id="people-say"><i className="fa fa-fw fa-comments"></i><span>People Say</span></button>
                 <button onClick={this.handlerCloseSideBar} className="btn2" id="statistics"><i className="fa fa-fw fa-history"></i><span>Statistics</span></button>
                 <SignUp 
                     handler={this.handler} 
                     handlerCloseSideBar={this.handlerCloseSideBar}/>
                 <div id="social">
-                    <a href="/" className="fa fa-fw fa-facebook"></a>
-                    <a href="/" className="fa fa-fw fa-twitter"></a>
-                    <a href="/" className="fa fa-fw fa-instagram"></a>
+                    <a href="/" className="fa fa-fw fa-facebook"><span>facebook</span></a>
+                    <a href="/" className="fa fa-fw fa-twitter"><span>twitter</span></a>
+                    <a href="/" className="fa fa-fw fa-instagram"><span>instagram</span></a>
                     <p>Copyright @ 2018 ReadyForIt. All rights reserved.</p>
                 </div>
             </Menu>

@@ -30,7 +30,7 @@ class SignUp extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    const data = new FormData();
+    //const data = new FormData();
     const form = event.target;
     fetch("/api/register", {
       method: "POST",
