@@ -14,10 +14,12 @@
     -o-box-shadow: 0 0 10px rgba(0,0,0,0.6);
     overflow:  auto;
     -webkit-overflow-scrolling: touch;
+    
 }
 
 .weatherDisplay {
     text-align: center;
+    
 }
 
 .weather:focus{
@@ -27,6 +29,7 @@
 .weather h2{
     color: #313131 !important;
     text-align: center;
+    white-space:pre-line;
 }
 
 .buttonClose {

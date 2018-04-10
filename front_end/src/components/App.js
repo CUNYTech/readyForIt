@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Map from './Map';
-
-// import logo from '../css/logo.svg';
+import CurrentWeather from './CurrentWeather';
+//import logo from '../css/logo.svg';
 import '../css/App.css';
 
 
@@ -11,7 +11,10 @@ class App extends Component {
             <div className="App">
                 <Map />
             </div>
-        );
+            
+            
+            
+        )
     }
 }
 

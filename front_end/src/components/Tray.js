@@ -70,7 +70,6 @@ class Tray extends Component {
         //const Weather = zoomThreshold ? <CurrentWeather lat={(this.props.viewport.latitude).toString()} lng={(this.props.viewport.longitude).toString()}/> : null;
         return(
             <div className={`tray ${zoomThreshold ? '' : 'hidden'}`}>
-                {/* {Weather} */}
                 <div className='trayHeader'>
                     {/* <div onClick={this._handleTrayToggle}>toggle</div> */}
                     <button className='button' onClick={this._handleTrayToggle}>{zoomThreshold ? 'Show Info' : null}</button>
