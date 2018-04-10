@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import '../css/Weather.css';
+import '../css/Donations.css';
 // import ReactDOM from 'react-dom';
 import Modal from 'react-modal';
 import Donation from './Donation';
@@ -43,14 +44,12 @@ class Donations extends Component {
     }
 
     grabDonations = (e) => {
-        
         if (e.keyCode === 13) {
             const city = e.target.value;
-            
             fetch(`/api/donations/${city}`)
             .then(response => response.json())
             .then(res => this.setState({donations: res.data}))
-            .catch(error => console.error(error))
+            .catch( this.setState({donations:[]}))
         }
     }
 
@@ -84,8 +83,12 @@ class Donations extends Component {
                         className="h2">
                     Donations</h2>
                     <div className="weatherDisplay">
-                    <input type="search" placeholder={this.props.placeholderText} onKeyUp={this.grabDonations}/>
-                </div>
+                        <input 
+                            className="inputBox"
+                            type="search" 
+                            placeholder="Try searchning locations, campaign titles and names" 
+                            onKeyUp={this.grabDonations}/>
+                    </div>
                 {this.state.donations.length ?  
                     this.state.donations.map((donation,i) => (
                         <Donation key={`donate-${i}`} donation={donation}/>

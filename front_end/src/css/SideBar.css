@@ -31,6 +31,8 @@
     background: #ffffff;
     /* padding: 2.5em 1.5em 0; */
     font-size: 1.15em;
+    overflow-y: hidden !important;
+    overflow-x: hidden !important;
 }
    
 /* Morph shape necessary with bubble or elastic */
