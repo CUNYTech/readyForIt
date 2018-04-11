@@ -27,7 +27,9 @@ class LocationSearch extends React.Component {
  
     return (
     <div className="location-search">
-        <PlacesAutocomplete inputProps={inputProps} onSelect={this.handleSelect}/>
+        <PlacesAutocomplete 
+            inputProps={inputProps} 
+            onSelect={this.handleSelect}/>
     </div>
     )
   }

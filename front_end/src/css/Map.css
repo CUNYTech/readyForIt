@@ -117,4 +117,12 @@ button:focus {
     left: 50%;
     width: 50%;
     transform: translate(-50%);
+    
+}
+
+@media (max-width: 40em){
+    .location-search{
+        left: 20%;
+        transform: translate(0);
+    }
 }
