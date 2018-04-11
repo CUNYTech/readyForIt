@@ -1,23 +1,30 @@
 /* temp menu style from https://www.mapbox.com/mapbox-gl-js/example/toggle-layers/ */
 .layersMenu {
-    background: #fff;
+    /* background: #fff; */
     position: absolute;
     z-index: 10;
     top: 5px;
     right: 5px;
-    border-radius: 3px;
-    width: 120px;
+    /* border-radius: 3px; */
+    /* width: 120px; */
     border: 1px solid rgba(0,0,0,0.4);
     font-family: 'Open Sans', sans-serif;
 }
 
+@media (max-width: 40em){
+    .layersMenu {
+        z-index: 10;
+        top: 5px;
+        right: 5px;
+        width: 80px;
+    }
+}
+
 .layersMenu a {
-    font-size: 13px;
+    font-size: 12px;
     color: #404040;
     display: block;
-    margin: 0;
-    padding: 0;
-    padding: 10px;
+    padding: 7px;
     text-decoration: none;
     border-bottom: 1px solid rgba(0,0,0,0.25);
     text-align: center;
@@ -28,23 +35,23 @@
 }
 
 .layersMenu a:hover {
-    background-color: #f8f8f8;
+    background: rgba(248,248,248, 0.7);
     color: #404040;
 }
 
 .layersMenu a.active {
-    background-color: #005896;
+    background: rgba(0,88,150, 0.7);
     color: #ffffff;
 }
 
 .layersMenu a.active:hover {
-    background: #0079ce;
+    background: rgba(0,121,206, 0.7);
 }
 
 .tray{
     z-index: 10;
     position: absolute;
-    background-color: rgba(255, 255, 255,0.0);
+    background: rgba(255, 255, 255,0.0);
     display: inline-block;
     bottom: 0;
     display: flex;
