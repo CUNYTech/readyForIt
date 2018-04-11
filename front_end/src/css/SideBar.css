@@ -1,9 +1,20 @@
 .bm-burger-button {
     position: fixed;
-    width: 36px;
-    height: 30px;
-    left: 36px;
-    top: 36px;
+    /* width: 36px;
+    height: 30px; */
+    width: 30px;
+    height: 25px;
+    /* left: 36px;
+    top: 36px; */
+    left: 18px;
+    top: 18px;
+}
+
+@media (max-width: 48em){
+    .bm-burger-button {
+        width: 18px;
+        height: 15px;
+    }
 }
 
 /* Color/shape of burger icon bars */
