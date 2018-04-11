@@ -2,10 +2,12 @@ from flask import Blueprint, jsonify, request, render_template
 from app.models import User
 from emails import send_email
 from app.forms import UserForm
-import sys
-api = Blueprint('api', __name__, url_prefix='/api')
 import requests
 from bs4 import BeautifulSoup
+
+
+api = Blueprint('api', __name__, url_prefix='/api')
+
 
 @api.route('/register', methods=['POST'])
 def register():
@@ -55,18 +57,20 @@ def donations(city):
     # all[0].find("div", {"class": "tile-title"}).text
 
     results = []
-
-    for item in all:
-        item_dict = {}
-        image = item.find("img", {"class": "tile-img"})
-        item_dict["image"] = image.attrs['src']
-        item_dict["title"] =item.find("div", {"class": "tile-title"}).text
-        item_dict["amount"] =item.find("div", {"class" : "tile-footer"}).text.split('\n')[1].rstrip()
-        item_dict["description"] =item.find("div", {"class": "tile-description"}).text.strip()
-        link = item.find("a", {"class": "read-more"})
-        item_dict["link"] = link.attrs['href']
-        #adding item to dictinary
-        results.append(item_dict)
+    try:
+        for item in all:
+            item_dict = {}
+            image = item.find("img", {"class": "tile-img"})
+            item_dict["image"] = image.attrs['src']
+            item_dict["title"] = item.find("div", {"class": "tile-title"}).text
+            item_dict["amount"] = item.find("div", {"class" : "tile-footer"}).text.split('\n')[1].rstrip()
+            item_dict["description"] = item.find("div", {"class": "tile-description"}).text.strip()
+            link = item.find("a", {"class": "read-more"})
+            item_dict["link"] = link.attrs['href']
+            # adding item to dictinary
+            results.append(item_dict)
+    except AttributeError as e:
+        pass
     
     response = jsonify({'data': results})
     response.status_code = 200

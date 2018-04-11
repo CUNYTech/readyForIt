@@ -96,7 +96,7 @@ class SignUp extends Component {
               name="phone_number"
               type="tel"
               pattern="\d?-?\s?\(?\d{3}\)?\s?-?\d{3}-?\s?\d{4}"
-              placeholder="18625062457"
+              placeholder="555-555-5555"
               title="Please use A valid Phone Number"
             />
 
