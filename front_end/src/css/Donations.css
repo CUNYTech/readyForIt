@@ -20,3 +20,12 @@
         font-size: 0.8em;
     }
 }
+
+.container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;  /* flex-end -> float rigth;  space-between  */
+    /*align-items: flex-start; */ /* baseline, center, flex-end, align-self for individual item */
+    /*align-content: space-between;*/
+}

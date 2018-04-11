@@ -89,12 +89,14 @@ class Donations extends Component {
                             placeholder="Try searchning locations, campaign titles and names" 
                             onKeyUp={this.grabDonations}/>
                     </div>
-                {this.state.donations.length ?  
-                    this.state.donations.map((donation,i) => (
-                        <Donation key={`donate-${i}`} donation={donation}/>
-                    ))    
-                    
-                : null}
+                    <div className="container">
+                        {this.state.donations.length ?  
+                        this.state.donations.map((donation,i) => (
+                            <Donation key={`donate-${i}`} donation={donation}/>
+                        ))    
+                        
+                        : null}
+                    </div>
                 </div>
                 
             </Modal>
