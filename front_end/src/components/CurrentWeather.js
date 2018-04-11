@@ -1,10 +1,9 @@
 import React,  { Component } from 'react';
-// import ReactDOM from 'react-dom';
-// import axios from 'axios';
 import ReactWeather from 'react-open-weather';
 import moment from 'moment';
 import { getGeoLocation } from '../helpers/geolocation';
 import WeatherIcon from 'react-open-weather-icons';
+import 'react-open-weather/lib/css/ReactWeather.css';
 
 class CurrentWeather extends Component {
   state = {
@@ -37,8 +36,6 @@ class CurrentWeather extends Component {
         apikey="f0c751300d9340ac8c9202734182503"
         icon="01d"
         name="04d"
-        // type="city"
-        // city="Manhattan"
         type={this.state.type}
         lon={this.state.lon}
         lat={this.state.lat}
