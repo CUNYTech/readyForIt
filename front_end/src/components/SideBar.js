@@ -42,7 +42,7 @@ class SideBar extends Component {
                 <Weather handlerCloseSideBar={this.handlerCloseSideBar}/>
                 <Donations handlerCloseSideBar={this.handlerCloseSideBar}/>
                 <button onClick={this.handlerCloseSideBar} className="btn2" id="people-say"><i className="fa fa-fw fa-comments"></i><span>People Say</span></button>
-                <button onClick={this.handlerCloseSideBar} className="btn2" id="statistics"><i className="fa fa-fw fa-history"></i><span>Statistics</span></button>
+                {/* <button onClick={this.handlerCloseSideBar} className="btn2" id="statistics"><i className="fa fa-fw fa-history"></i><span>Statistics</span></button> */}
                 <SignUp 
                     handler={this.handler} 
                     handlerCloseSideBar={this.handlerCloseSideBar}/>
