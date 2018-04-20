@@ -44,6 +44,10 @@
     right: 10px;
 }
 
+.center {
+    margin: auto;
+}
+
 @media(max-width: 48em){
     .weather{
         left: 15%;
