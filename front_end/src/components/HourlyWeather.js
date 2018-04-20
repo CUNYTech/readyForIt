@@ -35,10 +35,10 @@ class HourlyWeather extends React.Component {
                             return (
                                 <tr>
                                     <td key={i}>{hour.FCTTIME.pretty}</td> 
-                                    <td key={i}>{hour.temp.english}</td> 
+                                    <td key={i}>{hour.temp.english}&#176;F / {hour.temp.metric}&#176;C</td> 
                                     <td key={i}>{hour.condition}<img src={hour.icon_url}/></td> 
                                     <td key={i}>{hour.wdir.dir} @ {hour.wspd.english}mph</td>
-                                    <td key={i}>{hour.feelslike.english}</td>
+                                    <td key={i}>{hour.feelslike.english}&#176;F / {hour.feelslike.metric}&#176;C</td>
                                 </tr>
                             )
                             })}
