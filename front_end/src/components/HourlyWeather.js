@@ -37,7 +37,7 @@ class HourlyWeather extends React.Component {
                                     <td key={i}>{hour.FCTTIME.pretty}</td> 
                                     <td key={i}>{hour.temp.english}</td> 
                                     <td key={i}>{hour.condition}<img src={hour.icon_url}/></td> 
-                                    <td key={i}>{hour.wdir.dir} @ {hour.wspd.english}</td>
+                                    <td key={i}>{hour.wdir.dir} @ {hour.wspd.english}mph</td>
                                     <td key={i}>{hour.feelslike.english}</td>
                                 </tr>
                             )
