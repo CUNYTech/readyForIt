@@ -93,7 +93,7 @@ class HourlyWeather extends React.Component {
                         </tr>
                             {outputData.map(function(hour, i){
                                 return (
-                                    <tr key={i.value}>
+                                    <tr key={i}>
                                         <td>{hour.FCTTIME.pretty}</td> 
                                         <td>{hour.temp.english}&#176;F / {hour.temp.metric}&#176;C</td> 
                                         <td>{hour.condition}<img src={hour.icon_url} alt="weather-icon"/></td> 
