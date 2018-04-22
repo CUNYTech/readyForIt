@@ -17,8 +17,7 @@ class HourlyWeather extends React.Component {
         this.geoLocate()
         console.log(this.state.LatLng)
         this.getCityState()
-        console.log('after citystate called: ' + this.state.CityState)
-        this.getHourlyWeather()
+        console.log( this.state.CityState)
         console.log('after weather called: ' + this.state.HourlyWeather) 
     }
 
@@ -31,7 +30,7 @@ class HourlyWeather extends React.Component {
         this.setState({HourlyWeather: response.data.hourly_forecast});
         });
     }
-
+    
     getCityState() {
         //need to pass the lat and lng from LatLng state to url below to reverse geocode
         axios.get('https://maps.googleapis.com/maps/api/geocode/json?latlng=40.714224,-73.961452&key=AIzaSyCwT2vJgcdN6ts22XFyjbiLUC4ZrYLsEMs')
@@ -41,6 +40,8 @@ class HourlyWeather extends React.Component {
             if (address.types[0] === "administrative_area_level_1") {
                 const city = address.address_components[0].long_name;
                 const state = address.address_components[0].short_name;
+                console.log(city);
+                console.log(state)
                 this.setState({
                     CityState: {
                         city: city,
@@ -50,7 +51,8 @@ class HourlyWeather extends React.Component {
             }
         })
         this.setState({reverseGeoLocation: res.data.results});
-        });
+        console.log("hello");
+        }).then(() => this.getHourlyWeather());
     }
 
     geoLocate() {
