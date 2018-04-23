@@ -9,7 +9,7 @@ class CurrentWeather extends Component {
   state = {
     lon: "-73.935242",
     lat: "40.730610",
-    type: "geo",
+    type: "auto",
 
   }
 

@@ -86,7 +86,7 @@ class Donations extends Component {
                         <input 
                             className="inputBox"
                             type="search" 
-                            placeholder="Try searchning locations, campaign titles and names" 
+                            placeholder="Try searching locations, campaign titles and names" 
                             onKeyUp={this.grabDonations}/>
                     </div>
                     <div className="container">

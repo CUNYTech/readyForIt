@@ -1,5 +1,5 @@
 {
-    "python.pythonPath": "/Users/fdsale/miniconda3/envs/fb/bin/python",
+    "python.pythonPath": "C:\\Users\\kevin\\AppData\\Local\\Programs\\Python\\Python36\\python.exe",
     "python.formatting.provider": "autopep8",
     "python.linting.pylintEnabled": false,
     "python.linting.flake8Enabled": true,
