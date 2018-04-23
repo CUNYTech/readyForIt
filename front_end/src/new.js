@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import '../css/Weather.css';
-// import {getGeoLocation} from '../helpers/geolocation';
+import {getGeoLocation} from '../helpers/geolocation';
 
 class HourlyWeather extends React.Component {
     constructor(){

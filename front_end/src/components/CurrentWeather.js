@@ -1,9 +1,7 @@
 import React,  { Component } from 'react';
 import ReactWeather from 'react-open-weather';
 import { getGeoLocation } from '../helpers/geolocation';
-// import WeatherIcon from 'react-open-weather-icons';
 import 'react-open-weather/lib/css/ReactWeather.css';
-// import axios from 'axios';
 import HourlyWeather from './HourlyWeather';
 import '../css/CurrentWeather.css';
 
