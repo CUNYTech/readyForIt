@@ -5,6 +5,7 @@ import { getGeoLocation } from '../helpers/geolocation';
 import 'react-open-weather/lib/css/ReactWeather.css';
 // import axios from 'axios';
 import HourlyWeather from './HourlyWeather';
+import '../css/CurrentWeather.css';
 
 class CurrentWeather extends Component {
   constructor(props){
