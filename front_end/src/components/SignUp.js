@@ -45,6 +45,7 @@ class SignUp extends Component {
         response.json().then(jsonData => {
           console.log(jsonData);
           this.setState({modalIsOpen: false});
+          setTimeout(function(){ alert("Thank you for subscribing!"); }, 3000);
           // Handle object stored in jsonData.Message
         });
       }
