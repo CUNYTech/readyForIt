@@ -46,7 +46,6 @@ class HourlyWeather extends React.Component {
                                 city: city,
                                 USstate: state
                             }
-                        }, ()=> {
                         })
                     }
                 })
