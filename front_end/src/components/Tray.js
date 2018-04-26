@@ -11,7 +11,8 @@ class Tray extends Component {
     state = {
         toggle: false,
         watchwarn: [],
-        bounds: []
+        bounds: [],
+        tweets: []
     }
 
     _handleTrayToggle = (e) => {
@@ -24,15 +25,18 @@ class Tray extends Component {
         if(JSON.stringify(this.props.bounds) !== JSON.stringify(this.state.bounds)){
             const zoom = this.props.bounds[4];
             if(zoom >= 8){ //zoom level
-                this.setState({bounds: this.props.bounds}, () => this.getWatchWarnInBound());
+                this.setState({bounds: this.props.bounds}, () => {
+                    this.getWatchWarnInBound();
+                    this.getTweets();
+                });
             }
         }
     }
 
     //get all watches and warnings in viewport
     getWatchWarnInBound = debounce(() => {
-        if(this.state.bounds){
-            const bounds = this.state.bounds;
+        const bounds = this.state.bounds;
+        if(bounds){
             fetch(`https://idpgis.ncep.noaa.gov/arcgis/rest/services/NWS_Forecasts_Guidance_Warnings/watch_warn_adv/MapServer/1/query?f=json&returnGeometry=true&spatialRel=esriSpatialRelIntersects&maxAllowableOffset=0&geometry={"xmin":${bounds[0]},"ymin":${bounds[1]},"xmax":${bounds[2]},"ymax":${bounds[3]},"spatialReference":{"wkid":4326}&geometryType=esriGeometryEnvelope&inSR=4326&outFields=*&outSR=4326`)
                 .then(res => res.json())
                 .then(data => {
@@ -41,6 +45,21 @@ class Tray extends Component {
             });
         }
     },2000);
+
+    //get recent tweets related to storm
+    getTweets = debounce(() => {
+        const bounds = this.state.bounds;
+        if(bounds){
+            const points = `${bounds[2]},${bounds[3]},${bounds[0]},${bounds[1]}`; //format points
+            const terms = 'weather,storm';
+            fetch(`/api/twitter/${points}/${terms}`)
+                .then(res => res.json())
+                .then(data => {
+                    const tweets = data.data;
+                    this.setState({tweets});
+            });
+        }
+    },4000)
 
     render(){
         //get unique phenom
@@ -51,7 +70,7 @@ class Tray extends Component {
             return p;
         },[])
 
-        const cards = filteredWatchWarn.map(i => {
+        const watchWarnCards = filteredWatchWarn.map(i => {
             const { phenom, prod_type, wfo, url, warnid } = i.attributes;
             const style = {background: COLORS[phenom]}
             return(
@@ -61,6 +80,16 @@ class Tray extends Component {
                 </div>
             )
         });
+
+        const tweetCards = this.state.tweets.map(tweet=> {
+            const url = tweet.entities.urls[0] ? tweet.entities.urls[0].url : null;
+            return(
+                <div key={tweet.id}>
+                    <p>{tweet.text}</p>
+                    <p><a target='_blank' href={url}>link to tweet</a></p>
+                </div>
+            )
+        })
 
         const zoom = this.props.bounds[4];
         //hide tray, zoom is too out
@@ -74,7 +103,8 @@ class Tray extends Component {
                     <button className='button' onClick={this._handleTrayToggle}>{zoomThreshold ? 'Show Info' : null}</button>
                 </div>
                 <div className={`trayBody ${this.state.toggle ? '' : 'hidden'}`} id="card">
-                    {cards}
+                    {watchWarnCards}
+                    {tweetCards}
                 </div>
             </div>
         )
