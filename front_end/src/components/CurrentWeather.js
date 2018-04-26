@@ -18,20 +18,42 @@ class CurrentWeather extends Component {
   }
 
   componentWillMount(){
-    getGeoLocation().then(latlng => {
-      this.setState({
-        LatLng: {
-          lat: latlng[0].toFixed(10),
-          lon: latlng[1].toFixed(10),
-        }
-      });
-    }).catch(error=> {
-      this.setState({
-        LatLng: {
-          type: "auto"
-        }
-      })
-    });
+    this.geoLocate()
+    // getGeoLocation().then(latlng => {
+    //   this.setState({
+    //     LatLng: {
+    //       lat: latlng[0].toFixed(10),
+    //       lon: latlng[1].toFixed(10),
+    //     }
+    //   });
+    // }).catch(error=> {
+    //   this.setState({
+    //     LatLng: {
+    //       type: "auto"
+    //     }
+    //   })
+    // });
+  }
+
+  geoLocate() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition((position) => {
+            this.setState({
+                    LatLng: {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                    }
+                });
+        })
+    } else {
+        this.setState({
+                LatLng: {
+                    lat: 0.730610,
+                    lng: -73.935242,
+                    type: "auto"
+                }
+            });
+    }
   }
 
   render() {
