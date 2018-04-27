@@ -1,10 +1,21 @@
 from flask import Blueprint, jsonify, request, render_template
+import os
 from app.models import User
 from emails import send_email
 from app.forms import UserForm
 import requests
 from bs4 import BeautifulSoup
 
+import json
+from tweepy.streaming import StreamListener
+from tweepy import OAuthHandler
+from tweepy import Stream
+
+ACCESS_TOKEN = os.environ.get("ACCESS_TOKEN")
+ACCESS_TOKEN_SECRET = os.environ.get("ACCESS_TOKEN_SECRET")
+CONSUMER_KEY = os.environ.get("CONSUMER_KEY")
+CONSUMER_SECRET = os.environ.get("CONSUMER_SECRET")
+CALLBACK_URL = os.environ.get("CALLBACK_URL")
 
 api = Blueprint('api', __name__, url_prefix='/api')
 
@@ -88,5 +99,50 @@ def donations(city):
 
     response = jsonify({'data': results})
     response.status_code = 200
-
+    
     return response
+
+
+#twiter API Setup
+class StdOutListener(StreamListener):
+    #https://stackoverflow.com/questions/20863486/tweepy-streaming-stop-collecting-tweets-at-x-amount
+    def __init__(self, api = None, max_tweets = 5):
+        super(StdOutListener, self).__init__()
+        self.num_tweets = 0
+        self.max_tweets = max_tweets
+        self.tweets = []
+
+    def on_data(self, data):
+        if self.num_tweets < self.max_tweets:
+            self.tweets.append(data)
+            self.num_tweets += 1
+            return True
+        else:
+            return False
+        
+
+    def on_error(self, status):
+        print(status)
+        return False
+
+@api.route('/twitter/<points>/<terms>', methods=['GET'])
+def getTweets(points,terms):
+    try:
+        #setup parms for filter
+        locations = [float(point) for point in points.split(',')]
+        track = [term for term in terms.split(',')]
+        
+        l = StdOutListener(max_tweets = 5)
+        auth = OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
+        auth.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
+        stream = Stream(auth, l)
+        stream.filter(locations = locations, track = track) 
+        return jsonify({
+            'data' : [json.loads(i) for i in l.tweets],
+            'status_code' : 200
+        })
+    except:
+        return jsonify({
+            'data' : [],
+            'status_code' : 400
+        })

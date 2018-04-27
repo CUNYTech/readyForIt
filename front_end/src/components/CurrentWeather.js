@@ -1,9 +1,7 @@
 import React,  { Component } from 'react';
 import ReactWeather from 'react-open-weather';
 import { getGeoLocation } from '../helpers/geolocation';
-// import WeatherIcon from 'react-open-weather-icons';
 import 'react-open-weather/lib/css/ReactWeather.css';
-// import axios from 'axios';
 import HourlyWeather from './HourlyWeather';
 import '../css/CurrentWeather.css';
 
@@ -20,20 +18,42 @@ class CurrentWeather extends Component {
   }
 
   componentWillMount(){
-    getGeoLocation().then(latlng => {
-      this.setState({
-        LatLng: {
-          lat: latlng[0].toFixed(10),
-          lon: latlng[1].toFixed(10),
-        }
-      });
-    }).catch(error=> {
-      this.setState({
-        LatLng: {
-          type: "auto"
-        }
-      })
-    });
+    this.geoLocate()
+    // getGeoLocation().then(latlng => {
+    //   this.setState({
+    //     LatLng: {
+    //       lat: latlng[0].toFixed(10),
+    //       lon: latlng[1].toFixed(10),
+    //     }
+    //   });
+    // }).catch(error=> {
+    //   this.setState({
+    //     LatLng: {
+    //       type: "auto"
+    //     }
+    //   })
+    // });
+  }
+
+  geoLocate() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition((position) => {
+            this.setState({
+                    LatLng: {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                    }
+                });
+        })
+    } else {
+        this.setState({
+                LatLng: {
+                    lat: 0.730610,
+                    lng: -73.935242,
+                    type: "auto"
+                }
+            });
+    }
   }
 
   render() {
