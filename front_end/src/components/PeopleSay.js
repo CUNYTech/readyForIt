@@ -4,8 +4,9 @@ import { Timeline } from 'react-twitter-widgets';
 class PeopleSay extends React.Component {
     render() {
         return (
-            <div>
-                <Timeline
+            <div >
+                <Timeline 
+                className ="twitter"
                     dataSource={{
                     sourceType: 'profile',
                     screenName: 'twitterdev'
