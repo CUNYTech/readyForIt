@@ -42,7 +42,7 @@ class SideBar extends Component {
                 <h1>ReadyForIt</h1>
                 <Weather handlerCloseSideBar={this.handlerCloseSideBar}/>
                 <Donations handlerCloseSideBar={this.handlerCloseSideBar}/>
-                <People handlerCloseSideBar={this.handlerCloseSideBar}/>
+                {/* <People handlerCloseSideBar={this.handlerCloseSideBar}/> */}
                 <SignUp 
                     handler={this.handler} 
                     handlerCloseSideBar={this.handlerCloseSideBar}/>
