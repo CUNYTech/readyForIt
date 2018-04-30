@@ -5,6 +5,7 @@ import Donations from './Donations';
 import {slide as Menu} from 'react-burger-menu';
 
 import '../css/SideBar.css';
+import PeopleSay from './PeopleSay';
 
 
 class SideBar extends Component {
@@ -33,6 +34,7 @@ class SideBar extends Component {
     }
     render () {
         return (
+            <div>
             <Menu 
                 className="menu"
                 isOpen={this.state.menuOpen}
@@ -41,7 +43,7 @@ class SideBar extends Component {
                 <h1>ReadyForIt</h1>
                 <Weather handlerCloseSideBar={this.handlerCloseSideBar}/>
                 <Donations handlerCloseSideBar={this.handlerCloseSideBar}/>
-                <button onClick={this.handlerCloseSideBar} className="btn2" id="people-say"><i className="fa fa-fw fa-comments"></i><span>People Say</span></button>
+                {/* <button onClick={this.handlerCloseSideBar} className="btn2" id="people-say"><i className="fa fa-fw fa-comments"></i><span>People Say</span></button> */}
                 {/* <button onClick={this.handlerCloseSideBar} className="btn2" id="statistics"><i className="fa fa-fw fa-history"></i><span>Statistics</span></button> */}
                 <SignUp 
                     handler={this.handler} 
@@ -52,7 +54,10 @@ class SideBar extends Component {
                     <a href="/" className="fa fa-fw fa-instagram"><span>instagram</span></a>
                     <p>Copyright @ 2018 ReadyForIt. All rights reserved.</p>
                 </div>
+                <PeopleSay />
             </Menu>
+            
+            </div>
         );
     }
 }
