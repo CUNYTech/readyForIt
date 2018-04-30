@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import SignUp from './SignUp';
 import Weather from './Weather';
 import Donations from './Donations';
+import People from './People';
 import {slide as Menu} from 'react-burger-menu';
 
 import '../css/SideBar.css';
@@ -41,8 +42,7 @@ class SideBar extends Component {
                 <h1>ReadyForIt</h1>
                 <Weather handlerCloseSideBar={this.handlerCloseSideBar}/>
                 <Donations handlerCloseSideBar={this.handlerCloseSideBar}/>
-                <button onClick={this.handlerCloseSideBar} className="btn2" id="people-say"><i className="fa fa-fw fa-comments"></i><span>People Say</span></button>
-                {/* <button onClick={this.handlerCloseSideBar} className="btn2" id="statistics"><i className="fa fa-fw fa-history"></i><span>Statistics</span></button> */}
+                <People handlerCloseSideBar={this.handlerCloseSideBar}/>
                 <SignUp 
                     handler={this.handler} 
                     handlerCloseSideBar={this.handlerCloseSideBar}/>
