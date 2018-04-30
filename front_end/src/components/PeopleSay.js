@@ -6,14 +6,13 @@ class PeopleSay extends React.Component {
         return (
             <div >
                 <Timeline 
-                className ="twitter"
                     dataSource={{
                     sourceType: 'profile',
                     screenName: 'twitterdev'
                     }}
                     options={{
                     username: 'TwitterDev',
-                    height: '400'
+                    height: '90vh'
                     }}
                     onLoad={() => console.log('Timeline is loaded!')}
                 />
