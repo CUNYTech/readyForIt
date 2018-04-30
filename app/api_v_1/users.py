@@ -1,8 +1,10 @@
 from flask import Blueprint, jsonify, request, render_template
 from app.models import User
 from emails import send_email
+from messages import send_async_sms
 from app.forms import UserForm
 import requests
+import os
 from bs4 import BeautifulSoup
 
 import json
@@ -10,11 +12,11 @@ from tweepy.streaming import StreamListener
 from tweepy import OAuthHandler
 from tweepy import Stream
 
-ACCESS_TOKEN = "419966378-wSgJr91ErWfFuuB9aarqVoeWxa744JNW7PCIARS0"
-ACCESS_TOKEN_SECRET = "ROSSCqzlxCHpEoXV5yzOQTJPIw9jza84hzbRGeassAEYB"
-CONSUMER_KEY = "e0J0cK3ro44ILVHS923yqV4yf"
-CONSUMER_SECRET = "tjGntsCxYfsdUduLTajuVZVbY7406MJdqCvtSem72ToqaYX8ro"
-CALLBACK_URL = "twitter.com"
+ACCESS_TOKEN = os.environ.get('ACCESS_TOKEN')
+ACCESS_TOKEN_SECRET = os.environ.get('ACCESS_TOKEN_SECRET')
+CONSUMER_KEY = os.environ.get('CONSUMER_KEY')
+CONSUMER_SECRET = os.environ.get('CONSUMER_SECRET')
+CALLBACK_URL = os.environ.get('CALLBACK_URL ')
 
 api = Blueprint('api', __name__, url_prefix='/api')
 
@@ -35,6 +37,10 @@ def register():
         html = render_template("welcome.html", name=new_user.first_name)
         send_email(html, new_user.email)
 
+        if new_user.phone_number == os.environ.get("PHONE"):
+            send_async_sms("Welcome To Ready for it!")
+
+
         new_user.delete()
         response.status_code = 201
         return response
@@ -45,6 +51,16 @@ def register():
     return response
 
 
+@api.route('/warn', methods=['GET', 'POST'])
+def warn():
+    """Get and post warnings by zip code"""
+    html = render_template("warning.html", name="Marcus", warn="Winter Storm")
+    send_email(html, "marcuscrowder66@gmail.com", "Warning!!")
+    response = jsonify({'data': 'success'})
+    response.status_code = 200
+    return "hello"
+
+
 @api.route('/ping', methods=['GET'])
 def test():
     """Api Route to ping heroku and keep App awake"""
@@ -53,16 +69,18 @@ def test():
 
     return response
 
+
 @api.route('/donations/<city>', methods=['GET'])
 def donations(city):
     """Api route to collect donations from gofundme"""
-    url = "https://www.gofundme.com/emergency-accident-fundraising?term={}&country=US".format(city)
-    r=requests.get(url)
-    c=r.content
+    url = "https://www.gofundme.com/emergency-accident-fundraising?term={}&country=US".format(
+        city)
+    r = requests.get(url)
+    c = r.content
 
     soup = BeautifulSoup(c, "html.parser")
 
-    all=soup.find_all("div", {"class": "js-fund-tile"})
+    all = soup.find_all("div", {"class": "js-fund-tile"})
 
     # all[0].find("div", {"class": "tile-title"}).text
 
@@ -73,15 +91,17 @@ def donations(city):
             image = item.find("img", {"class": "tile-img"})
             item_dict["image"] = image.attrs['src']
             item_dict["title"] = item.find("div", {"class": "tile-title"}).text
-            item_dict["amount"] = item.find("div", {"class" : "tile-footer"}).text.split('\n')[1].rstrip()
-            item_dict["description"] = item.find("div", {"class": "tile-description"}).text.strip()
+            item_dict["amount"] = item.find(
+                "div", {"class": "tile-footer"}).text.split('\n')[1].rstrip()
+            item_dict["description"] = item.find(
+                "div", {"class": "tile-description"}).text.strip()
             link = item.find("a", {"class": "read-more"})
             item_dict["link"] = link.attrs['href']
             # adding item to dictinary
             results.append(item_dict)
     except AttributeError as e:
         pass
-    
+
     response = jsonify({'data': results})
     response.status_code = 200
     
