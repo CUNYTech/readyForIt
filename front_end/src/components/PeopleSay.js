@@ -8,10 +8,10 @@ class PeopleSay extends React.Component {
                 <Timeline 
                     dataSource={{
                     sourceType: 'profile',
-                    screenName: 'twitterdev'
+                    screenName: 'weatherchannel'
                     }}
                     options={{
-                    username: 'TwitterDev',
+                    username: 'weatherchannel',
                     height: '90vh'
                     }}
                     onLoad={() => console.log('Timeline is loaded!')}
