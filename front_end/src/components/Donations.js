@@ -4,6 +4,7 @@ import '../css/Donations.css';
 // import ReactDOM from 'react-dom';
 import Modal from 'react-modal';
 import Donation from './Donation';
+import PeopleSay from './PeopleSay';
 
 class Donations extends Component {
     constructor() {
@@ -100,6 +101,7 @@ class Donations extends Component {
                 </div>
                 
             </Modal>
+            
         </div>
         );
     }

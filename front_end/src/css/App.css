@@ -6,6 +6,12 @@ body {
   font-size: 14px;
 }
 
+/*TWITTER*/
+
+.twitter {
+  height: 70%;
+}
+
 /* Navigation */
 .toggle {
   position: relative;
