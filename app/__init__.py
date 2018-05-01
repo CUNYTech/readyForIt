@@ -43,6 +43,10 @@ def create_app(config):
     @app.route('/favicon.ico')
     def serve_fav():
         return send_from_directory('build', 'favicon.ico')
+    
+    @app.route('/manifest.json')
+    def serve_manifest():
+        return send_from_directory('build', 'manifest.json')
 
     
     from app import models
