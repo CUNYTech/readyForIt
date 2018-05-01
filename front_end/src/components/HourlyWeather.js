@@ -21,7 +21,7 @@ class HourlyWeather extends React.Component {
     getHourlyWeather() {
         const USstate = this.state.CityState.USstate;
         const city = this.state.CityState.city;
-        axios.get(`http://api.wunderground.com/api/bfb68c7fd935c550/hourly/q/${USstate}/${city}.json`)
+        axios.get(`https://api.wunderground.com/api/bfb68c7fd935c550/hourly/q/${USstate}/${city}.json`)
         .then(response => {
         this.setState({HourlyWeather: response.data.hourly_forecast});
         });
