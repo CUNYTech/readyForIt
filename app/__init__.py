@@ -40,9 +40,9 @@ def create_app(config):
     def serve_worker():
         return send_from_directory('build', 'service-worker.js')
     
-    @app.route('/favicon.ico')
+    @app.route('/favicon2.ico')
     def serve_fav():
-        return send_from_directory('build', 'favicon.ico')
+        return send_from_directory('build', 'favicon2.ico')
     
     @app.route('/manifest.json')
     def serve_manifest():
