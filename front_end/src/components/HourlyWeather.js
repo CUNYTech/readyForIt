@@ -73,11 +73,13 @@ class HourlyWeather extends React.Component {
                             <th>Feels Like</th>
                         </tr>
                             {outputData.map(function(hour, i){
+                                const icon_url = 'https' + hour.icon_url.slice(4);
+        
                                 return (
                                     <tr key={i}>
                                         <td>{hour.FCTTIME.pretty}</td> 
                                         <td>{hour.temp.english}&#176;F / {hour.temp.metric}&#176;C</td> 
-                                        <td>{hour.condition}<img src={hour.icon_url} alt="weather-icon"/></td> 
+                                        <td>{hour.condition}<img src={icon_url} alt="weather-icon"/></td> 
                                         <td>{hour.wdir.dir} @ {hour.wspd.english}mph</td>
                                         <td>{hour.feelslike.english}&#176;F / {hour.feelslike.metric}&#176;C</td>
                                     </tr>

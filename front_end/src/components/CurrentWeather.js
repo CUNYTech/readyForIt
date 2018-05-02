@@ -40,8 +40,8 @@ class CurrentWeather extends Component {
         navigator.geolocation.getCurrentPosition((position) => {
             this.setState({
                     LatLng: {
-                        lat: position.coords.latitude,
-                        lng: position.coords.longitude
+                        lat: position.coords.latitude.toString(),
+                        lng: position.coords.longitude.toString()
                     } 
                 });
         })
